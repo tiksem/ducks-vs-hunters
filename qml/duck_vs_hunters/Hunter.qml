@@ -12,15 +12,31 @@ AnimatedSprite {
     height: 100
     running: true
     source: "images/hunter.png"
+    state: "MOVE"
+
+    states: [
+        State {
+            name: "MOVE"
+            StateChangeScript {
+                script: {
+                    moving.move();
+                }
+            }
+        }
+
+    ]
+
 
     NumberAnimation on x {
         id: moving
-        onStopped: startMoving()
-        Component.onCompleted: function() {
-            startMoving()
+
+        onStopped: {
+            if(hunter.state == "MOVE"){
+                move();
+            }
         }
 
-        function moveToOneSide(){
+        function move(){
             to = 0;
             var maximumDistance = hunter.parent.width - hunter.width;
             if(x < (hunter.parent.width - hunter.width) / 2.0){
@@ -29,10 +45,6 @@ AnimatedSprite {
 
             var distance = Math.abs(to - x);
             duration = distance / hunter.movementSpeed;
-        }
-
-        function startMoving(){
-            moveToOneSide();
             running = true;
         }
     }
