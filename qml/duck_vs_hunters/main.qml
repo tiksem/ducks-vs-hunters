@@ -4,7 +4,7 @@ Rectangle {
     width: 960
     height: 540
 
-    transform: Scale { xScale: screenSize.width / width; yScale: screenSize.height / height}
+    //transform: Scale { xScale: screenSize.width / width; yScale: screenSize.height / height}
 
     Image {
         width: parent.width
@@ -17,5 +17,9 @@ Rectangle {
         onClicked: {
             Qt.quit();
         }
+    }
+
+    Hunter {
+        anchors.bottom: parent.bottom
     }
 }
