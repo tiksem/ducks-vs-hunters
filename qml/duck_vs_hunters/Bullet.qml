@@ -3,7 +3,6 @@ import QtQuick 2.0
 AnimatedSprite {
     id: bullet
     property double movementSpeed: 0.5;
-    property double angle: Math.PI / 2.0;
     property int distance: -1000;
 
     frameCount: 6
@@ -25,7 +24,7 @@ AnimatedSprite {
         running: false;
     }
 
-    function move(){
+    function move(angle){
         var sin = Math.sin(angle);
         var cos = Math.cos(angle);
         var toX = moveByX.to = distance * cos + x;

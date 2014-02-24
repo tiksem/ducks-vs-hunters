@@ -1,8 +1,10 @@
 import QtQuick 2.0
+import "random.js" as Random
 
 AnimatedSprite {
     id: hunter
     property double movementSpeed: 0.5; // in pixels per millisecond
+    property var bulletAngles: [Math.PI / 2, Math.PI / 4, Math.PI / 2 + Math.PI / 4]
 
     frameCount: 6
     frameRate: 10
@@ -40,7 +42,8 @@ AnimatedSprite {
                                                                   x: hunter.x,
                                                                   y: hunter.y
                                                               });
-                    bullet.move();
+                    var angle = Random.getRandomElementOfArray(bulletAngles);
+                    bullet.move(angle);
                     moving.stop();
                     changeStateAfterDelay("MOVE", 500);
                 }
