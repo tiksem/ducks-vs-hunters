@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import "utils.js" as Utils
 
 AnimatedSprite {
     id: hunter
@@ -16,9 +15,9 @@ AnimatedSprite {
     state: "MOVE"
 
     function changeStateAfterDelay(newState, delay){
-        Utils.setTimeout(hunter, function(){
-            state = newState;
-        }, delay)
+        Utils.executeAfterDelay(function(){
+            hunter.state = newState;
+        }, delay);
     }
 
     states: [
@@ -37,9 +36,12 @@ AnimatedSprite {
 
             StateChangeScript {
                 script: {
-                    var bullet = Qt.createComponent("Bullet.qml");
-                    bullet.x = hunter.x;
-                    bullet.y = hunter.y;
+                    var bullet = Qt.createComponent("Bullet.qml").createObject(hunter.parent, {
+                                                                  x: hunter.x,
+                                                                  y: hunter.y
+                                                              });
+                    bullet.move();
+                    moving.stop();
                     changeStateAfterDelay("MOVE", 500);
                 }
             }

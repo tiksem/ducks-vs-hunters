@@ -7,7 +7,9 @@ DEPLOYMENTFOLDERS = folder_01
 QML_IMPORT_PATH =
 
 # The .cpp file which was generated for your project. Feel free to hack it.
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    qmlutils.cpp \
+    qutils.cpp
 
 # Installation path
 # target.path =
@@ -18,3 +20,11 @@ qtcAddDeployment()
 
 OTHER_FILES += \
     qml/duck_vs_hunters/Hunter.qml
+
+HEADERS += \
+    qmlutils.h \
+    qutils.h
+
+CONFIG += c++11
+
+QMAKE_CXXFLAGS += -std=c++11

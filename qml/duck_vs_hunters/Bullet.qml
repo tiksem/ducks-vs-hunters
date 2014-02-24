@@ -2,8 +2,9 @@ import QtQuick 2.0
 
 AnimatedSprite {
     id: bullet
-    property double movementSpeed: 0.5; // in pixels per millisecond
-    property double angle: Math.pi / 2;
+    property double movementSpeed: 0.5;
+    property double angle: Math.PI / 2.0;
+    property int distance: -1000;
 
     frameCount: 6
     frameRate: 10
@@ -12,18 +13,26 @@ AnimatedSprite {
     width: 100
     height: 100
     running: true
-    source: "images/hunter.png"
+    source: "images/bullet.png"
 
-    NumberAnimation on x{
-        running: true
-        to: 1000 * Math.sin(angle)
-        duration: (to - x) / movementSpeed;
+    NumberAnimation on x {
+        id: moveByX;
+        running: false;
     }
 
-    NumberAnimation on y{
-        running: true
-        to: 1000 * Math.cos(angle)
-        duration: (to - y) / movementSpeed;
+    NumberAnimation on y {
+        id: moveByY;
+        running: false;
+    }
+
+    function move(){
+        var sin = Math.sin(angle);
+        var cos = Math.cos(angle);
+        var toX = moveByX.to = distance * cos + x;
+        var toY = moveByY.to = distance * sin + y;
+        var duration = moveByX.duration = moveByY.duration = Math.abs(distance) / movementSpeed;
+        moveByX.running = moveByY.running = true;
+        bullet.destroy(duration);
     }
 }
 
