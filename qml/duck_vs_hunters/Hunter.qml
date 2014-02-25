@@ -3,15 +3,15 @@ import "random.js" as Random
 
 AnimatedSprite {
     id: hunter
-    property double movementSpeed: 0.5; // in pixels per millisecond
+    property double movementSpeed: 0.3; // in pixels per millisecond
     property var bulletAngles: [Math.PI / 2, Math.PI / 4, Math.PI / 2 + Math.PI / 4]
 
-    frameCount: 6
-    frameRate: 10
-    frameHeight: 100
-    frameWidth: 100
-    width: 100
-    height: 100
+    frameCount: 30
+    frameRate: 30
+    frameHeight: 150
+    frameWidth: 120
+    width: 120
+    height: 150
     running: true
     source: "images/hunter.png"
     state: "MOVE"
