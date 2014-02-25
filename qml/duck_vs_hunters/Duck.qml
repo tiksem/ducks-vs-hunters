@@ -2,10 +2,10 @@ import QtQuick 2.0
 
 AnimatedSprite {
     id: duck
-    property double movementSpeed: 0.2;
+    property double movementSpeed: 0.3;
 
     frameCount: 12
-    frameRate: 10
+    frameRate: 25
     frameHeight: 140
     frameWidth: 140
     width: 140
