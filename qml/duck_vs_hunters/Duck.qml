@@ -83,7 +83,7 @@ AnimatedSprite {
     }
 
     function fire(){
-        var bullet = Qt.createComponent("Bullet.qml").
+        var bullet = Qt.createComponent("DuckBullet.qml").
         createObject(duck.parent, {
             x: x,
             y: y,
