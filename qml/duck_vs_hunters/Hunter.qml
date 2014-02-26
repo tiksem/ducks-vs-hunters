@@ -43,7 +43,7 @@ AnimatedSprite {
             StateChangeScript {
                 script: {
                     moving.move();
-                    changeStateAfterDelay("FIRE", 3000);
+                    changeStateAfterDelay("FIRE", Random.randomIntFromInterval(200, 1800));
                 }
             }
         },

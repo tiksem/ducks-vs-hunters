@@ -1,6 +1,8 @@
 import QtQuick 2.0
 
 Rectangle {
+    id: main
+
     width: 960
     height: 540
 
@@ -24,12 +26,22 @@ Rectangle {
         x: 0
         y: 0
         focus: true
-        targets: [hunter]
+        targets: hunterFactory.hunters
     }
 
-    Hunter {
-        id: hunter
-        target: duck
-        anchors.bottom: parent.bottom
+    Timer {
+        id: hunterFactory
+        interval: 2000
+        running: true
+        repeat: true
+
+        property var hunters: []
+
+        onTriggered: {
+            var hunter = Qt.createComponent("Hunter.qml").createObject(main);
+            hunter.target = duck;
+            hunter.anchors.bottom = hunter.parent.bottom;
+            hunters.push(hunter);
+        }
     }
 }
