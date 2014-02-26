@@ -16,6 +16,14 @@ AnimatedSprite {
     source: "images/hunter.png"
     state: "MOVE"
 
+    transform: Rotation {
+        id: rotation
+        origin.x: hunter.width / 2
+        origin.y: hunter.height / 2
+        axis.x: 0; axis.y: 0; axis.z: 0     // set axis.x to 1 to rotate around y-axis
+        angle: 180    // the default angle
+    }
+
     function changeStateAfterDelay(newState, delay){
         Utils.executeAfterDelay(function(){
             hunter.state = newState;
@@ -67,6 +75,12 @@ AnimatedSprite {
             var maximumDistance = hunter.parent.width - hunter.width;
             if(x < (hunter.parent.width - hunter.width) / 2.0){
                 to = maximumDistance;
+            }
+
+            if(to == 0){
+                rotation.axis.y = 1;
+            } else {
+                rotation.axis.y = 0;
             }
 
             var distance = Math.abs(to - x);
