@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QJSValue>
+#include <QQuickItem>
+#include <QQuickImageProvider>
 
 class QMLUtils : public QObject
 {
@@ -10,8 +12,9 @@ class QMLUtils : public QObject
 public:
     explicit QMLUtils(QObject *parent = 0);
     Q_INVOKABLE void executeAfterDelay(QJSValue callback, int delay);
+    Q_INVOKABLE bool collide(QJSValue a, QJSValue b);
 private:
-
+    QQuickImageProvider imageProvider;
 signals:
 
 public slots:

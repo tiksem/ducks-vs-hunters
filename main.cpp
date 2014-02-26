@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    QtQuick2ApplicationViewer viewer;
+    QQuickView viewer;
     QScreen* screen = app.screens().at(0);
     QSize screenSize = screen->size();
 
@@ -20,9 +20,7 @@ int main(int argc, char *argv[])
 
     viewer.setSource(QUrl("qml/duck_vs_hunters/main.qml"));
 
-    std::function<void()> e;
-
-    viewer.showExpanded();
+    viewer.showNormal();
 
     return app.exec();
 }
