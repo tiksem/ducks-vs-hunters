@@ -6,6 +6,8 @@ AnimatedSprite {
     property double movementSpeed: 0.3; // in pixels per millisecond
     property var bulletAngles: [Math.PI / 2, Math.PI / 4, Math.PI / 2 + Math.PI / 4]
     property var target: undefined;
+    property int hp: 10;
+    property int radius: 150;
 
     frameCount: 30
     frameRate: 30
@@ -26,9 +28,13 @@ AnimatedSprite {
     }
 
     function changeStateAfterDelay(newState, delay){
-        Utils.executeAfterDelay(function(){
+        Utils.executeAfterDelay(hunter, function(){
             hunter.state = newState;
         }, delay);
+    }
+
+    function die(){
+        destroy();
     }
 
     states: [
@@ -50,7 +56,7 @@ AnimatedSprite {
                     var bullet = Qt.createComponent("Bullet.qml").createObject(hunter.parent, {
                                                                   x: hunter.x,
                                                                   y: hunter.y,
-                                                                  target: target
+                                                                  targets: [target]
                                                               });
                     var angle = Random.getRandomElementOfArray(bulletAngles);
                     bullet.move(angle);

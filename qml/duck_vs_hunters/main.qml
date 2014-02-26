@@ -24,9 +24,11 @@ Rectangle {
         x: 0
         y: 0
         focus: true
+        targets: [hunter]
     }
 
     Hunter {
+        id: hunter
         target: duck
         anchors.bottom: parent.bottom
     }

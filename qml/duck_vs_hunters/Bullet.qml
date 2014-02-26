@@ -1,11 +1,12 @@
 import QtQuick 2.0
 import "geom.js" as Geom
+import "game.js" as Game
 
 AnimatedSprite {
     id: bullet
     property double movementSpeed: 0.5;
     property int distance: -1000;
-    property var target: undefined;
+    property var targets: [];
     property int damage: 10;
 
     frameCount: 6
@@ -27,9 +28,21 @@ AnimatedSprite {
         running: false;
     }
 
-    function onCollide(){
+    function onCollide(target){
         bullet.destroy();
-        target.damage(damage);
+        Game.damageTarget(target, damage);
+    }
+
+    function tryCollideWithTarget(target){
+        var bulletCenterX = Geom.getItemCenterX(bullet);
+        var bulletCenterY = Geom.getItemCenterY(bullet);
+
+        var targetCenterX = Geom.getItemCenterX(target);
+        var targetCenterY = Geom.getItemCenterY(target);
+
+        if(Geom.isPointInsideCircle(bulletCenterX, bulletCenterY, targetCenterX, targetCenterY, target.radius)){
+            onCollide(target);
+        }
     }
 
     Timer {
@@ -39,15 +52,9 @@ AnimatedSprite {
         interval: 50
 
         onTriggered: {
-            if(target){
-                var bulletCenterX = Geom.getItemCenterX(bullet);
-                var bulletCenterY = Geom.getItemCenterY(bullet);
-
-                var targetCenterX = Geom.getItemCenterX(target);
-                var targetCenterY = Geom.getItemCenterY(target);
-
-                if(Geom.isPointInsideCircle(bulletCenterX, bulletCenterY, targetCenterX, targetCenterY, target.radius)){
-                    onCollide();
+            for(var i = 0; i < targets.length; i++){
+                if(targets[i]){
+                    tryCollideWithTarget(targets[i]);
                 }
             }
         }

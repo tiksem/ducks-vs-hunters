@@ -5,6 +5,7 @@ AnimatedSprite {
     property double movementSpeed: 0.3;
     property int radius: 50;
     property int hp: 10;
+    property var targets: [];
 
     frameCount: 12
     frameRate: 25
@@ -51,6 +52,18 @@ AnimatedSprite {
         running: false;
     }
 
+
+    Timer {
+        id: fireLoop
+        interval: 1000
+        repeat: true
+        running: true;
+
+        onTriggered: {
+            fire();
+        }
+    }
+
     function move(direction){
         var to = 0;
 
@@ -65,15 +78,19 @@ AnimatedSprite {
         moving.running = true;
     }
 
-    function damage(value){
-        hp -= value;
-        if(hp <= 0){
-            die();
-        }
-    }
-
     function die(){
         destroy();
+    }
+
+    function fire(){
+        var bullet = Qt.createComponent("Bullet.qml").
+        createObject(duck.parent, {
+            x: x,
+            y: y,
+            targets: targets
+        });
+
+        bullet.move(Math.PI / 2 * 3);
     }
 
     Keys.onLeftPressed: state = "LEFT"

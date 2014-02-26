@@ -25,11 +25,15 @@ QMLUtils::QMLUtils(QQuickView* view, QObject *parent) :
 {
 }
 
-void QMLUtils::executeAfterDelay(QJSValue callback, int delay)
+void QMLUtils::executeAfterDelay(QJSValue parent, QJSValue callback, int delay)
 {
-    QUtils::executeAfterDelay([=]() mutable {
+    QTimer* timer = new QTimer(parent.toQObject());
+    timer->setInterval(delay);
+    timer->connect(timer, &QTimer::timeout, [=]() mutable {
         callback.call();
-    }, delay);
+        timer->stop();
+    });
+    timer->start();
 }
 
 static QString getSource(QJSValue value)
