@@ -5,6 +5,7 @@ AnimatedSprite {
     id: hunter
     property double movementSpeed: 0.3; // in pixels per millisecond
     property var bulletAngles: [Math.PI / 2, Math.PI / 4, Math.PI / 2 + Math.PI / 4]
+    property var target: undefined;
 
     frameCount: 30
     frameRate: 30
@@ -48,7 +49,8 @@ AnimatedSprite {
                 script: {
                     var bullet = Qt.createComponent("Bullet.qml").createObject(hunter.parent, {
                                                                   x: hunter.x,
-                                                                  y: hunter.y
+                                                                  y: hunter.y,
+                                                                  target: target
                                                               });
                     var angle = Random.getRandomElementOfArray(bulletAngles);
                     bullet.move(angle);

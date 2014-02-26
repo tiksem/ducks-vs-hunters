@@ -20,12 +20,14 @@ Rectangle {
     }
 
     Duck {
+        id: duck
         x: 0
         y: 0
         focus: true
     }
 
     Hunter {
+        target: duck
         anchors.bottom: parent.bottom
     }
 }

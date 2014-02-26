@@ -1,9 +1,12 @@
 import QtQuick 2.0
+import "geom.js" as Geom
 
 AnimatedSprite {
     id: bullet
     property double movementSpeed: 0.5;
     property int distance: -1000;
+    property var target: undefined;
+    property int damage: 10;
 
     frameCount: 6
     frameRate: 10
@@ -22,6 +25,32 @@ AnimatedSprite {
     NumberAnimation on y {
         id: moveByY;
         running: false;
+    }
+
+    function onCollide(){
+        bullet.destroy();
+        target.damage(damage);
+    }
+
+    Timer {
+        id: collisionTest
+        repeat: true;
+        running: true;
+        interval: 50
+
+        onTriggered: {
+            if(target){
+                var bulletCenterX = Geom.getItemCenterX(bullet);
+                var bulletCenterY = Geom.getItemCenterY(bullet);
+
+                var targetCenterX = Geom.getItemCenterX(target);
+                var targetCenterY = Geom.getItemCenterY(target);
+
+                if(Geom.isPointInsideCircle(bulletCenterX, bulletCenterY, targetCenterX, targetCenterY, target.radius)){
+                    onCollide();
+                }
+            }
+        }
     }
 
     function move(angle){

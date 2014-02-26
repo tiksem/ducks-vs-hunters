@@ -3,6 +3,8 @@ import QtQuick 2.0
 AnimatedSprite {
     id: duck
     property double movementSpeed: 0.3;
+    property int radius: 50;
+    property int hp: 10;
 
     frameCount: 12
     frameRate: 25
@@ -61,6 +63,17 @@ AnimatedSprite {
         var duration = moving.duration = distance / movementSpeed;
 
         moving.running = true;
+    }
+
+    function damage(value){
+        hp -= value;
+        if(hp <= 0){
+            die();
+        }
+    }
+
+    function die(){
+        destroy();
     }
 
     Keys.onLeftPressed: state = "LEFT"

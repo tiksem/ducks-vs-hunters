@@ -19,7 +19,8 @@ include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
 qtcAddDeployment()
 
 OTHER_FILES += \
-    qml/duck_vs_hunters/Hunter.qml
+    qml/duck_vs_hunters/Hunter.qml \
+    qml/duck_vs_hunters/geom.js
 
 HEADERS += \
     qmlutils.h \

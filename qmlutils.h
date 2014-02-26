@@ -5,16 +5,17 @@
 #include <QJSValue>
 #include <QQuickItem>
 #include <QQuickImageProvider>
+#include <QQuickView>
 
 class QMLUtils : public QObject
 {
     Q_OBJECT
 public:
-    explicit QMLUtils(QObject *parent = 0);
+    explicit QMLUtils(QQuickView* view, QObject *parent = 0);
     Q_INVOKABLE void executeAfterDelay(QJSValue callback, int delay);
     Q_INVOKABLE bool collide(QJSValue a, QJSValue b);
 private:
-    QQuickImageProvider imageProvider;
+    QQuickView* view;
 signals:
 
 public slots:

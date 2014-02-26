@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
     QQmlContext* context = viewer.rootContext();
     context->setContextProperty("screenSize", screenSize);
-    QMLUtils* utils = new QMLUtils();
+    QMLUtils* utils = new QMLUtils(&viewer);
     context->setContextProperty("Utils", utils);
 
     viewer.setSource(QUrl("qml/duck_vs_hunters/main.qml"));

@@ -19,9 +19,9 @@ public slots:
     }
 };
 
-QMLUtils::QMLUtils(QObject *parent) :
+QMLUtils::QMLUtils(QQuickView* view, QObject *parent) :
     QObject(parent),
-    imageProvider(QQmlImageProviderBase::Pixmap)
+    view(view)
 {
 }
 
@@ -57,7 +57,10 @@ static QSize getItemSize(QJSValue item)
 
 bool QMLUtils::collide(QJSValue a, QJSValue b)
 {
-    QRect intersection = getRectIntersection(a, b);
+    QRect aRect = getItemRect(a);
+    QRect bRect = getItemRect(b);
+
+    QRect intersection = aRect.intersected(bRect);
     if(intersection.isEmpty())
     {
         return false;
@@ -68,13 +71,45 @@ bool QMLUtils::collide(QJSValue a, QJSValue b)
 
     QSize requestedASize = getItemSize(a);
     QSize actualASize;
-    QPixmap aPixmap = imageProvider.requestPixmap(aSource, &actualASize, requestedASize);
+    QImage aImage = static_cast<QQuickImageProvider*>
+            (view->engine()->imageProvider(aSource))->requestImage(aSource, &actualASize, requestedASize);
     assert(requestedASize == actualASize);
 
     QSize requestedBSize = getItemSize(b);
     QSize actualBSize;
-    QPixmap bPixmap = imageProvider.requestPixmap(bSource, &actualBSize, requestedBSize);
+    QImage bImage = static_cast<QQuickImageProvider*>
+            (view->engine()->imageProvider(bSource))->requestImage(bSource, &actualBSize, requestedBSize);
     assert(requestedBSize == actualBSize);
 
-    return true;
+    QRect aCollisionRect = intersection;
+    aCollisionRect.moveLeft(aRect.x());
+    aCollisionRect.moveTop(aRect.y());
+
+    QRect bCollisionRect = intersection;
+    bCollisionRect.moveLeft(bRect.x());
+    bCollisionRect.moveTop(bRect.y());
+
+    for(int y = 0; y < intersection.height(); y++)
+    {
+        for(int x = 0; x < intersection.width(); x++)
+        {
+            int aX = x + aCollisionRect.x();
+            int bX = x + bCollisionRect.x();
+
+            int aY = y + aCollisionRect.y();
+            int bY = y + bCollisionRect.y();
+
+            int aAlpha = qAlpha(aImage.pixel(aX, aY));
+            if(aAlpha > 0)
+            {
+                int bAlpha = qAlpha(bImage.pixel(bX, bY));
+                if(bAlpha > 0)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
 }
