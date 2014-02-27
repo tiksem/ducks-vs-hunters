@@ -93,7 +93,21 @@ AnimatedSprite {
         bullet.move(Math.PI / 2 * 3);
     }
 
-    Keys.onLeftPressed: state = "LEFT"
-    Keys.onReleased: state = "STOP"
-    Keys.onRightPressed: state = "RIGHT"
+    Keys.onLeftPressed: {
+        if(!event.isAutoRepeat){
+            state = "LEFT"
+        }
+    }
+
+    Keys.onReleased: {
+        if(!event.isAutoRepeat){
+            state = "STOP"
+        }
+    }
+
+    Keys.onRightPressed: {
+        if(!event.isAutoRepeat){
+            state = "RIGHT"
+        }
+    }
 }
