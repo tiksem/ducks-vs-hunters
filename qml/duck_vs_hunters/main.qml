@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "random.js" as Random
 
 Rectangle {
     id: main
@@ -41,7 +42,9 @@ Rectangle {
             var hunter = Qt.createComponent("Hunter.qml").createObject(main);
             hunter.target = duck;
             hunter.anchors.bottom = hunter.parent.bottom;
+            hunter.x = Random.getRandomElementOfArray([0, main.width - hunter.width]);
             hunters.push(hunter);
+            hunter.state = "MOVE";
         }
     }
 

@@ -17,7 +17,7 @@ AnimatedSprite {
     height: 150
     running: true
     source: "images/hunter.png"
-    state: "MOVE"
+    state: "IDLE"
 
     transform: Rotation {
         id: rotation
