@@ -8,6 +8,7 @@ AnimatedSprite {
     property var target: undefined;
     property int hp: 10;
     property int radius: 150;
+    property int points: 10;
 
     frameCount: 30
     frameRate: 30
@@ -18,6 +19,8 @@ AnimatedSprite {
     running: true
     source: "images/hunter.png"
     state: "IDLE"
+
+    signal die;
 
     transform: Rotation {
         id: rotation
@@ -33,7 +36,7 @@ AnimatedSprite {
         }, delay);
     }
 
-    function die(){
+    onDie: {
         destroy();
     }
 

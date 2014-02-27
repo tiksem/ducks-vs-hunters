@@ -18,6 +18,8 @@ AnimatedSprite {
 
     state: "STOP"
 
+    signal die;
+
     states: [
         State {
             name: "STOP"
@@ -64,6 +66,10 @@ AnimatedSprite {
         }
     }
 
+    onDie: {
+        destroy();
+    }
+
     function move(direction){
         var to = 0;
 
@@ -76,10 +82,6 @@ AnimatedSprite {
         var duration = moving.duration = distance / movementSpeed;
 
         moving.running = true;
-    }
-
-    function die(){
-        destroy();
     }
 
     function fire(){

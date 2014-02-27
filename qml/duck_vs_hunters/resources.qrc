@@ -1,17 +1,19 @@
-<!DOCTYPE RCC><RCC version="1.0">
-<qresource>
-    <file>images/background.jpg</file>
-	<file>images/bullet.png</file>
-	<file>images/duck.png</file>
-	<file>images/duck_bullet.png</file>
-	<file>images/hunter.png</file>
-	<file>main.qml</file>
-	<file>Bullet.qml</file>
-	<file>Duck.qml</file>
-	<file>DuckBullet.qml</file>
-	<file>Hunter.qml</file>
-	<file>geom.js</file>
-	<file>random.js</file>
-	<file>game.js</file>
-</qresource>
+<RCC>
+    <qresource prefix="/">
+        <file>images/background.jpg</file>
+        <file>images/bullet.png</file>
+        <file>images/duck.png</file>
+        <file>images/duck_bullet.png</file>
+        <file>images/hunter.png</file>
+        <file>Bullet.qml</file>
+        <file>Duck.qml</file>
+        <file>DuckBullet.qml</file>
+        <file>Hunter.qml</file>
+        <file>geom.js</file>
+        <file>random.js</file>
+        <file>game.js</file>
+        <file>Game.qml</file>
+        <file>Main.qml</file>
+        <file>GameOver.qml</file>
+    </qresource>
 </RCC>

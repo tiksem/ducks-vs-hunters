@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     QMLUtils* utils = new QMLUtils(&viewer);
     context->setContextProperty("Utils", utils);
 
-    viewer.setSource(QUrl("qrc:///main.qml"));
+    viewer.setSource(QUrl("qrc:///Main.qml"));
 
     viewer.showNormal();
 

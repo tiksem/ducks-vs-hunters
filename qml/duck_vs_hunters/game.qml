@@ -4,10 +4,12 @@ import "random.js" as Random
 Rectangle {
     id: main
 
-    width: 960
-    height: 540
+    width: parent.width
+    height: parent.height
 
-    //transform: Scale { xScale: screenSize.width / width; yScale: screenSize.height / height}
+    property int points: 0;
+
+    signal gameOver;
 
     Image {
         width: parent.width
@@ -28,6 +30,10 @@ Rectangle {
         y: 0
         focus: true
         targets: hunterFactory.hunters
+
+        onDie: {
+            gameOver();
+        }
     }
 
     Timer {
@@ -41,13 +47,24 @@ Rectangle {
         onTriggered: {
             var hunter = Qt.createComponent("Hunter.qml").createObject(main);
             hunter.target = duck;
-            hunter.anchors.bottom = hunter.parent.bottom;
+            hunter.anchors.bottom = main.bottom;
             hunter.x = Random.getRandomElementOfArray([0, main.width - hunter.width]);
             hunters.push(hunter);
             hunter.state = "MOVE";
+            hunter.die.connect(function(){
+                points += hunter.points;
+            })
         }
     }
 
+    Text {
+        x: 10
+        y: 10
+        text: qsTr(points.toString())
+        font.family: "Verdana"
+        font.pixelSize: 50
+        color: Qt.red
+    }
 
     MouseArea {
         x: 0
