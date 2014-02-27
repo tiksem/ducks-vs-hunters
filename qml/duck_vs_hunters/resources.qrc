@@ -1,6 +1,17 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
     <file>images/background.jpg</file>
+	<file>images/bullet.png</file>
+	<file>images/duck.png</file>
+	<file>images/duck_bullet.png</file>
+	<file>images/hunter.png</file>
 	<file>main.qml</file>
+	<file>Bullet.qml</file>
+	<file>Duck.qml</file>
+	<file>DuckBullet.qml</file>
+	<file>Hunter.qml</file>
+	<file>geom.js</file>
+	<file>random.js</file>
+	<file>game.js</file>
 </qresource>
 </RCC>

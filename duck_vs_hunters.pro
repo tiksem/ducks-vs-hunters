@@ -29,3 +29,5 @@ HEADERS += \
 CONFIG += c++11
 
 QMAKE_CXXFLAGS += -std=c++11
+
+RESOURCES += qml/duck_vs_hunters/resources.qrc
