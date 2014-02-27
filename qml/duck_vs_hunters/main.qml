@@ -44,4 +44,33 @@ Rectangle {
             hunters.push(hunter);
         }
     }
+
+
+    MouseArea {
+        x: 0
+        width: main.width / 2
+        height: main.height
+
+        onPressed: {
+            duck.state = "LEFT"
+        }
+
+        onReleased: {
+            duck.state = "STOP"
+        }
+    }
+
+    MouseArea {
+        x: main.width / 2
+        width: main.width / 2
+        height: main.height
+
+        onPressed: {
+            duck.state = "RIGHT"
+        }
+
+        onReleased: {
+            duck.state = "STOP"
+        }
+    }
 }
