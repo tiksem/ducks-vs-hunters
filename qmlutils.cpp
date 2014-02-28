@@ -117,3 +117,34 @@ bool QMLUtils::collide(QJSValue a, QJSValue b)
 
     return false;
 }
+
+QString QMLUtils::readFromFile(QString path)
+{
+    QFile file(QCoreApplication::instance()->applicationDirPath() + '/' + path);
+    QString fileContent;
+
+    if(file.open(QIODevice::ReadOnly))
+    {
+        QString line;
+        QTextStream t( &file );
+        do
+        {
+            line = t.readLine();
+            fileContent += line;
+        }
+        while (!line.isNull());
+        file.close();
+    }
+
+    return fileContent;
+}
+
+void QMLUtils::writeToFile(QString path, QString content)
+{
+    QFile file(QCoreApplication::instance()->applicationDirPath() + '/' + path);
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream out(&file);
+    out<<content;
+
+    file.close();
+}

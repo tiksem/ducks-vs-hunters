@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import "random.js" as Random
-import com.tiksem.database 1.0
+import "file.js" as File
 
 Rectangle {
     id: main
@@ -69,12 +69,17 @@ Rectangle {
         }
     }
 
-    Database {
-        fileName: "settings.txt";
+    onGameOver: {
+        var settings = {
+            records: records.value
+        }
+
+        File.writeObjectToFile("settings", settings);
     }
 
-    onGameOver: {
-
+    Component.onCompleted: {
+        var settings = File.readObjectFromFile("settings");
+        records.value = settings.records || 0;
     }
 
     Text {

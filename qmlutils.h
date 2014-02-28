@@ -14,6 +14,8 @@ public:
     explicit QMLUtils(QQuickView* view, QObject *parent = 0);
     Q_INVOKABLE void executeAfterDelay(QJSValue parent, QJSValue callback, int delay);
     Q_INVOKABLE bool collide(QJSValue a, QJSValue b);
+    Q_INVOKABLE QString readFromFile(QString path);
+    Q_INVOKABLE void writeToFile(QString path, QString content);
 private:
     QQuickView* view;
 signals:

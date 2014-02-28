@@ -4,7 +4,7 @@ AnimatedSprite {
     id: duck
     property double movementSpeed: 0.3;
     property int radius: 50;
-    property int hp: 1000;
+    property int hp: 10;
     property var targets: [];
 
     frameCount: 13
@@ -91,7 +91,6 @@ AnimatedSprite {
     }
 
     function fire(){
-        console.time("fire");
         var bullet = internal.duckBulletComponent.createObject(duck.parent, {
             x: x,
             y: y,
@@ -99,7 +98,6 @@ AnimatedSprite {
         });
 
         bullet.move(Math.PI / 2 * 3);
-        console.timeEnd("fire");
     }
 
     Keys.onLeftPressed: {

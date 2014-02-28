@@ -15,5 +15,6 @@
         <file>Game.qml</file>
         <file>Main.qml</file>
         <file>GameOver.qml</file>
+        <file>file.js</file>
     </qresource>
 </RCC>

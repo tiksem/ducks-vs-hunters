@@ -21,7 +21,19 @@ void QMLKeyValueDatabase::get(QString key, QJSValue onFinish)
     QFutureWatcher<QString>* watcher = new QFutureWatcher<QString>(this);
     watcher->setFuture(future);
     watcher->connect(watcher, &QFutureWatcher<QString>::finished, [=]() mutable {
-        onFinish.call(QJSValueList()<<watcher->result());
+        QJSValueList args;
+        QString result = watcher->result();
+
+        if(result.isNull())
+        {
+            args.append(QJSValue());
+        }
+        else
+        {
+            args<<result;
+        }
+
+        onFinish.call(args);
     });
 }
 
@@ -31,13 +43,18 @@ void QMLKeyValueDatabase::set(QString key, QString value, QJSValue onFinish)
 
     QFuture<void> future = QtConcurrent::run([=]() mutable {
         settings->setValue(key, value);
+        settings->sync();
     });
 
     QFutureWatcher<void>* watcher = new QFutureWatcher<void>(this);
     watcher->setFuture(future);
-    watcher->connect(watcher, &QFutureWatcher<void>::finished, [=]() mutable {
-        onFinish.call();
-    });
+
+    if(onFinish.isCallable())
+    {
+        watcher->connect(watcher, &QFutureWatcher<void>::finished, [=]() mutable {
+            onFinish.call();
+        });
+    }
 }
 
 QString QMLKeyValueDatabase::getFileName(){
@@ -46,10 +63,12 @@ QString QMLKeyValueDatabase::getFileName(){
 
 void QMLKeyValueDatabase::setFileName(const QString& value)
 {
-    assert(fileName_.isNull());
+    if(fileName_ == value)
+    {
+        return;
+    }
 
     fileName_ = value;
-
     QString path = QCoreApplication::instance()->applicationDirPath();
     settings = new QSettings(path + "/" + fileName_, QSettings::NativeFormat, this);
 }
