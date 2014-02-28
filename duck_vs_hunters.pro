@@ -18,12 +18,6 @@ SOURCES += main.cpp \
 include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
 qtcAddDeployment()
 
-OTHER_FILES += \
-    qml/duck_vs_hunters/Hunter.qml \
-    qml/duck_vs_hunters/geom.js \
-    qml/duck_vs_hunters/Game.qml \
-    qml/duck_vs_hunters/GameOver.qml
-
 HEADERS += \
     qmlutils.h \
     qutils.h

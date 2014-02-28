@@ -4,6 +4,7 @@
 #include <QQuickImageProvider>
 #include <QRect>
 #include <assert.h>
+#include <QQmlContext>
 
 class ExecuteAfterDelay : public QObject
 {
@@ -23,6 +24,7 @@ QMLUtils::QMLUtils(QQuickView* view, QObject *parent) :
     QObject(parent),
     view(view)
 {
+    gameState_ = view->rootContext()->engine()->newObject();
 }
 
 void QMLUtils::executeAfterDelay(QJSValue parent, QJSValue callback, int delay)
@@ -147,4 +149,9 @@ void QMLUtils::writeToFile(QString path, QString content)
     out<<content;
 
     file.close();
+}
+
+QJSValue QMLUtils::getGameState()
+{
+    return gameState_;
 }

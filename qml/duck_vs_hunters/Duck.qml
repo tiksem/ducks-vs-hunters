@@ -4,7 +4,7 @@ AnimatedSprite {
     id: duck
     property double movementSpeed: 0.3;
     property int radius: 50;
-    property int hp: 10;
+    property int hp: 1000;
     property var targets: [];
 
     frameCount: 13
@@ -85,13 +85,16 @@ AnimatedSprite {
         moving.running = true;
     }
 
-    QtObject {
-        id: internal
-        property var duckBulletComponent: Qt.createComponent("DuckBullet.qml")
+    Component {
+        id: duckBulletComponent
+
+        DuckBullet {
+
+        }
     }
 
     function fire(){
-        var bullet = internal.duckBulletComponent.createObject(duck.parent, {
+        var bullet = duckBulletComponent.createObject(duck.parent, {
             x: x,
             y: y,
             targets: targets

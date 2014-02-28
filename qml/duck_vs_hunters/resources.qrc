@@ -16,5 +16,10 @@
         <file>Main.qml</file>
         <file>GameOver.qml</file>
         <file>file.js</file>
+        <file>images/double.png</file>
+        <file>Combo.qml</file>
+        <file>images/rampage.png</file>
+        <file>images/triple.png</file>
+        <file>images/ultra.png</file>
     </qresource>
 </RCC>

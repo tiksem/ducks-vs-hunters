@@ -16,8 +16,11 @@ public:
     Q_INVOKABLE bool collide(QJSValue a, QJSValue b);
     Q_INVOKABLE QString readFromFile(QString path);
     Q_INVOKABLE void writeToFile(QString path, QString content);
+    QJSValue getGameState();
+    Q_PROPERTY(QJSValue gameState READ getGameState)
 private:
     QQuickView* view;
+    QJSValue gameState_;
 signals:
 
 public slots:

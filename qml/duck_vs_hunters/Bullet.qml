@@ -18,6 +18,8 @@ AnimatedSprite {
     running: true
     source: "images/bullet.png"
 
+    signal combo(int count);
+
     NumberAnimation on x {
         id: moveByX;
         running: false;
@@ -29,7 +31,6 @@ AnimatedSprite {
     }
 
     function onCollide(target){
-        bullet.destroy();
         Game.damageTarget(target, damage);
     }
 
@@ -45,6 +46,15 @@ AnimatedSprite {
         }
     }
 
+    function checkForCombo(killedTargetsPerShoot){
+        if(killedTargetsPerShoot <= 1){
+            return;
+        }
+
+        console.log("combo detected");
+        combo(killedTargetsPerShoot);
+    }
+
     Timer {
         id: collisionTest
         repeat: true;
@@ -52,10 +62,21 @@ AnimatedSprite {
         interval: 50
 
         onTriggered: {
-            for(var i = 0; i < targets.length; i++){
-                if(targets[i]){
-                    tryCollideWithTarget(targets[i]);
+            var killedTargetsPerShoot = 0;
+            for(var i in targets){
+                var target = targets[i];
+                if(target){
+                    tryCollideWithTarget(target);
+                    if(!target || target.hp <= 0){
+                        killedTargetsPerShoot++;
+                    }
                 }
+            }
+
+            checkForCombo(killedTargetsPerShoot);
+
+            if(killedTargetsPerShoot >= 1){
+                bullet.destroy();
             }
         }
     }
