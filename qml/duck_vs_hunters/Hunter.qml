@@ -40,6 +40,11 @@ AnimatedSprite {
         destroy();
     }
 
+    QtObject {
+        id: internal
+        property var bulletComponent: Qt.createComponent("Bullet.qml")
+    }
+
     states: [
         State {
             name: "MOVE"
@@ -56,7 +61,7 @@ AnimatedSprite {
 
             StateChangeScript {
                 script: {
-                    var bullet = Qt.createComponent("Bullet.qml").createObject(hunter.parent, {
+                    var bullet = internal.bulletComponent.createObject(hunter.parent, {
                                                                   x: hunter.x,
                                                                   y: hunter.y,
                                                                   targets: [target]

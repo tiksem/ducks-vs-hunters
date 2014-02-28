@@ -4,16 +4,17 @@ AnimatedSprite {
     id: duck
     property double movementSpeed: 0.3;
     property int radius: 50;
-    property int hp: 10;
+    property int hp: 1000;
     property var targets: [];
 
-    frameCount: 12
+    frameCount: 13
     frameRate: 25
     frameHeight: 140
     frameWidth: 140
     width: 140
     height: 140
     running: true
+    interpolate: true
     source: "images/duck.png"
 
     state: "STOP"
@@ -84,15 +85,21 @@ AnimatedSprite {
         moving.running = true;
     }
 
+    QtObject {
+        id: internal
+        property var duckBulletComponent: Qt.createComponent("DuckBullet.qml")
+    }
+
     function fire(){
-        var bullet = Qt.createComponent("DuckBullet.qml").
-        createObject(duck.parent, {
+        console.time("fire");
+        var bullet = internal.duckBulletComponent.createObject(duck.parent, {
             x: x,
             y: y,
             targets: targets
         });
 
         bullet.move(Math.PI / 2 * 3);
+        console.timeEnd("fire");
     }
 
     Keys.onLeftPressed: {
