@@ -1,10 +1,8 @@
 #include <QtGui/QGuiApplication>
-#include "qtquick2applicationviewer.h"
 #include <QScreen>
 #include <QQmlContext>
 #include "qmlutils.h"
 #include <functional>
-#include "qmlkeyvaluedatabase.h"
 
 int main(int argc, char *argv[])
 {
@@ -18,8 +16,6 @@ int main(int argc, char *argv[])
     context->setContextProperty("screenSize", screenSize);
     QMLUtils* utils = new QMLUtils(&viewer);
     context->setContextProperty("Utils", utils);
-
-    qmlRegisterType<QMLKeyValueDatabase>("com.tiksem.database", 1, 0, "Database");
 
     viewer.setSource(QUrl("qrc:///Main.qml"));
 
