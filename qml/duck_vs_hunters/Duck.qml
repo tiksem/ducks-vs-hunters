@@ -8,7 +8,7 @@ AnimatedSprite {
     property var targets: [];
     property point assPosition: Qt.point(70, 120);
     property int assRadius: 5;
-    property int assBlockingDuration: 3000;
+    property int assBlockingDuration: 5000;
 
     frameCount: 13
     frameRate: 25
@@ -87,11 +87,17 @@ AnimatedSprite {
 
     function freeAss(){
         assBlocker.visible = false;
+        fireLoop.running = true;
+        blockedAssFire();
     }
 
     onAssDamaged: {
-        console.log("ass damaged");
+        if(assBlocker.visible){
+            return;
+        }
+
         assBlocker.visible = true;
+        fireLoop.running = false;
         Utils.executeAfterDelay(duck, freeAss, assBlockingDuration);
     }
 
@@ -125,14 +131,27 @@ AnimatedSprite {
         }
     }
 
-    function fire(){
+    function fireWithAngle(angle){
         var bullet = duckBulletComponent.createObject(duck.parent, {
             x: x,
             y: y,
             targets: targets
         });
 
-        bullet.move(Math.PI / 2 * 3);
+        bullet.move(angle);
+    }
+
+    function fire(){
+        fireWithAngle(Math.PI / 2 * 3)
+    }
+
+    function blockedAssFire(){
+        for(var angle = Math.PI + Math.PI / 4;
+            angle < Math.PI / 2 * 3 + Math.PI / 4 + 0.01;
+            angle += Math.PI / 8)
+        {
+            fireWithAngle(angle);
+        }
     }
 
     Keys.onLeftPressed: {
