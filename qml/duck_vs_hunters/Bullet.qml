@@ -35,7 +35,20 @@ AnimatedSprite {
         Game.damageTarget(target, damage);
     }
 
+    function onCollideWithAss(target){
+        target.assDamaged();
+    }
+
     function tryCollideWithTarget(target){
+        if(target.getAssCircle)
+        {
+            var ass = target.getAssCircle();
+            if(Geom.circleCollide(ass, bullet)){
+                onCollideWithAss(target);
+                return;
+            }
+        }
+
         if(Geom.itemCircleCollide(target, bullet)){
             onCollide(target);
         }

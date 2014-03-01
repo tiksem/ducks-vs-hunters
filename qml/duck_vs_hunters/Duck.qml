@@ -6,6 +6,8 @@ AnimatedSprite {
     property int radius: 50;
     property int hp: 1000;
     property var targets: [];
+    property point assPosition: Qt.point(70, 120);
+    property int assRadius: 5;
 
     frameCount: 13
     frameRate: 25
@@ -20,6 +22,7 @@ AnimatedSprite {
     state: "STOP"
 
     signal die;
+    signal assDamaged;
 
     states: [
         State {
@@ -71,6 +74,10 @@ AnimatedSprite {
         destroy();
     }
 
+    onAssDamaged: {
+        console.log("ass damaged");
+    }
+
     function move(direction){
         var to = 0;
 
@@ -83,6 +90,14 @@ AnimatedSprite {
         var duration = moving.duration = distance / movementSpeed;
 
         moving.running = true;
+    }
+
+    function getAssCircle(){
+        return {
+            x: assPosition.x + duck.x,
+            y: assPosition.y + duck.y,
+            radius: assRadius
+        };
     }
 
     Component {
