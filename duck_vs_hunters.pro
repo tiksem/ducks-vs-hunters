@@ -14,10 +14,6 @@ SOURCES += main.cpp \
 # Installation path
 # target.path =
 
-# Please do not modify the following two lines. Required for deployment.
-include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
-qtcAddDeployment()
-
 HEADERS += \
     qmlutils.h \
     qutils.h
@@ -28,3 +24,17 @@ QMAKE_CXXFLAGS += -std=c++11
 
 RESOURCES += qml/duck_vs_hunters/resources.qrc
 QT += quick
+
+OTHER_FILES += \
+    qml/duck_vs_hunters/file.js \
+    qml/duck_vs_hunters/game.js \
+    qml/duck_vs_hunters/geom.js \
+    qml/duck_vs_hunters/random.js \
+    qml/duck_vs_hunters/Bullet.qml \
+    qml/duck_vs_hunters/Combo.qml \
+    qml/duck_vs_hunters/Duck.qml \
+    qml/duck_vs_hunters/DuckBullet.qml \
+    qml/duck_vs_hunters/GameOver.qml \
+    qml/duck_vs_hunters/Hunter.qml \
+    qml/duck_vs_hunters/Main.qml \
+    qml/duck_vs_hunters/Game.qml

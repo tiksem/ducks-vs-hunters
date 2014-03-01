@@ -7,7 +7,7 @@ AnimatedSprite {
     property var bulletAngles: [Math.PI / 2, Math.PI / 4, Math.PI / 2 + Math.PI / 4]
     property var target: undefined;
     property int hp: 10;
-    property int radius: 150;
+    property int radius: 60;
     property int points: 10;
 
     frameCount: 30

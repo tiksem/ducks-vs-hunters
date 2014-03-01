@@ -19,8 +19,6 @@ Bullet {
         id: doubleCombo
 
         Combo {
-            fadeOutDuration: 1000;
-            duration: 1500;
             width: 356;
             height: 71;
             source: "images/double.png"
@@ -31,8 +29,6 @@ Bullet {
         id: tripleCombo
 
         Combo {
-            fadeOutDuration: 1000;
-            duration: 1500;
             width: 356;
             height: 71;
             source: "images/triple.png"
@@ -43,8 +39,6 @@ Bullet {
         id: ultraCombo
 
         Combo {
-            fadeOutDuration: 1000;
-            duration: 1500;
             width: 356;
             height: 71;
             source: "images/ultra.png"
@@ -55,8 +49,6 @@ Bullet {
         id: rampageCombo
 
         Combo {
-            fadeOutDuration: 1000;
-            duration: 1500;
             width: 356;
             height: 71;
             source: "images/rampage.png"

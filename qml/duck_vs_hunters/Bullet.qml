@@ -8,6 +8,7 @@ AnimatedSprite {
     property int distance: -1000;
     property var targets: [];
     property int damage: 10;
+    property int radius: 50;
 
     frameCount: 6
     frameRate: 10
@@ -35,13 +36,7 @@ AnimatedSprite {
     }
 
     function tryCollideWithTarget(target){
-        var bulletCenterX = Geom.getItemCenterX(bullet);
-        var bulletCenterY = Geom.getItemCenterY(bullet);
-
-        var targetCenterX = Geom.getItemCenterX(target);
-        var targetCenterY = Geom.getItemCenterY(target);
-
-        if(Geom.isPointInsideCircle(bulletCenterX, bulletCenterY, targetCenterX, targetCenterY, target.radius)){
+        if(Geom.itemCircleCollide(target, bullet)){
             onCollide(target);
         }
     }
