@@ -8,6 +8,7 @@ AnimatedSprite {
     property var targets: [];
     property point assPosition: Qt.point(70, 120);
     property int assRadius: 5;
+    property int assBlockingDuration: 3000;
 
     frameCount: 13
     frameRate: 25
@@ -74,8 +75,24 @@ AnimatedSprite {
         destroy();
     }
 
+    Image {
+        id: assBlocker;
+        visible: false;
+        source: "images/ass_blocker.png"
+        width: 140;
+        height: 56;
+        anchors.bottom: duck.bottom;
+        anchors.left: duck.left;
+    }
+
+    function freeAss(){
+        assBlocker.visible = false;
+    }
+
     onAssDamaged: {
         console.log("ass damaged");
+        assBlocker.visible = true;
+        Utils.executeAfterDelay(duck, freeAss, assBlockingDuration);
     }
 
     function move(direction){

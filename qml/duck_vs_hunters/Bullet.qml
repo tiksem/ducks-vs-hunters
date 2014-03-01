@@ -35,23 +35,22 @@ AnimatedSprite {
         Game.damageTarget(target, damage);
     }
 
-    function onCollideWithAss(target){
-        target.assDamaged();
-    }
-
     function tryCollideWithTarget(target){
         if(target.getAssCircle)
         {
             var ass = target.getAssCircle();
             if(Geom.circleCollide(ass, bullet)){
-                onCollideWithAss(target);
-                return;
+                target.assDamaged();
+                return true;
             }
         }
 
         if(Geom.itemCircleCollide(target, bullet)){
             onCollide(target);
+            return true;
         }
+
+        return false;
     }
 
     function checkForCombo(killedTargetsPerShoot){
@@ -71,10 +70,14 @@ AnimatedSprite {
 
         onTriggered: {
             var killedTargetsPerShoot = 0;
+            var targetReached = false;
             for(var i in targets){
                 var target = targets[i];
                 if(target){
-                    tryCollideWithTarget(target);
+                    if(tryCollideWithTarget(target)){
+                        targetReached = true;
+                    }
+
                     if(!target || target.hp <= 0){
                         killedTargetsPerShoot++;
                     }
@@ -83,7 +86,7 @@ AnimatedSprite {
 
             checkForCombo(killedTargetsPerShoot);
 
-            if(killedTargetsPerShoot >= 1){
+            if(targetReached){
                 bullet.destroy();
             }
         }

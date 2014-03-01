@@ -39,7 +39,7 @@ Rectangle {
 
     Timer {
         id: hunterFactory
-        interval: 100
+        interval: 2000
         running: true
         repeat: true
         property var hunterComponent: Qt.createComponent("Hunter.qml");
