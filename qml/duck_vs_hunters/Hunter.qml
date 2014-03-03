@@ -20,6 +20,8 @@ AnimatedSprite {
     source: "images/light_hunter.png"
     state: "IDLE"
 
+    property bool rotated: false;
+
     signal die;
 
     transform: Rotation {
@@ -36,7 +38,35 @@ AnimatedSprite {
         }, delay);
     }
 
+    Component {
+        id: deathAnimation
+
+        AnimatedSprite {
+            frameCount: 30
+            frameRate: 30
+            frameHeight: hunter.frameHeight
+            frameWidth: hunter.frameWidth
+
+            width: hunter.width
+            height: hunter.height
+            running: true
+            source: "images/light_die.png"
+
+            x: hunter.x;
+            y: hunter.y;
+
+            transform: Rotation {
+                origin.x: hunter.width / 2
+                origin.y: hunter.height / 2
+                axis.x: 0; axis.y: rotated ? 1 : 0; axis.z: 0     // set axis.x to 1 to rotate around y-axis
+                angle: 180    // the default angle
+            }
+        }
+    }
+
     onDie: {
+        var death = deathAnimation.createObject(hunter.parent);
+        death.destroy(death.frameCount / death.frameRate * 1000)
         destroy();
     }
 
@@ -76,6 +106,9 @@ AnimatedSprite {
 
     ]
 
+    onRotatedChanged: {
+        rotation.axis.y = rotated ? 1 : 0;
+    }
 
     NumberAnimation on x {
         id: moving
@@ -93,11 +126,7 @@ AnimatedSprite {
                 to = maximumDistance;
             }
 
-            if(to == 0){
-                rotation.axis.y = 1;
-            } else {
-                rotation.axis.y = 0;
-            }
+            rotated = to == 0;
 
             var distance = Math.abs(to - x);
             duration = distance / hunter.movementSpeed;

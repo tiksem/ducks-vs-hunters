@@ -22,5 +22,6 @@
         <file>images/ultra.png</file>
         <file>images/ass_blocker.png</file>
         <file>images/light_hunter.png</file>
+        <file>images/light_die.png</file>
     </qresource>
 </RCC>
