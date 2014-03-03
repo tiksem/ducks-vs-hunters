@@ -133,10 +133,11 @@ AnimatedSprite {
 
     function fireWithAngle(angle){
         var bullet = duckBulletComponent.createObject(duck.parent, {
-            x: x,
-            y: y,
+            x: assPosition.x + duck.x,
+            y: assPosition.y + duck.y,
             targets: targets
         });
+        bullet.x -= bullet.width / 2;
 
         bullet.move(angle);
     }

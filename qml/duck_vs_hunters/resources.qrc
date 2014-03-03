@@ -23,5 +23,8 @@
         <file>images/ass_blocker.png</file>
         <file>images/light_hunter.png</file>
         <file>images/light_die.png</file>
+        <file>images/light_shot.png</file>
+        <file>images/real_bullet.png</file>
+        <file>images/shit.png</file>
     </qresource>
 </RCC>

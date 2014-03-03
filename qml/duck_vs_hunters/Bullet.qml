@@ -2,22 +2,17 @@ import QtQuick 2.0
 import "geom.js" as Geom
 import "game.js" as Game
 
-AnimatedSprite {
+Image {
     id: bullet
     property double movementSpeed: 0.5;
     property int distance: -1000;
     property var targets: [];
     property int damage: 10;
-    property int radius: 50;
+    property int radius: 8;
 
-    frameCount: 6
-    frameRate: 10
-    frameHeight: 100
-    frameWidth: 100
-    width: 100
-    height: 100
-    running: true
-    source: "images/bullet.png"
+    width: 15
+    height: 15
+    source: "images/real_bullet.png"
 
     signal combo(int count);
 
