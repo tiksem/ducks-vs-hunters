@@ -17,7 +17,7 @@ AnimatedSprite {
     width: 120
     height: 150
     running: true
-    source: "images/hunter.png"
+    source: "images/light_hunter.png"
     state: "IDLE"
 
     signal die;

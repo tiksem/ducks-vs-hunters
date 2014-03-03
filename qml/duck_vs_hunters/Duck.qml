@@ -10,8 +10,8 @@ AnimatedSprite {
     property int assRadius: 5;
     property int assBlockingDuration: 5000;
 
-    frameCount: 13
-    frameRate: 25
+    frameCount: 25
+    frameRate: 40
     frameHeight: 140
     frameWidth: 140
     width: 140
