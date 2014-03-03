@@ -39,22 +39,30 @@ Rectangle {
 
     Timer {
         id: hunterFactory
-        interval: 2000
+        interval: 100
         running: true
         repeat: true
         property var hunterComponent: Qt.createComponent("Hunter.qml");
 
         property var hunters: []
+        property int maxHuntersCount: 5;
+        property int huntersCount: 0;
 
         onTriggered: {
+            if(huntersCount >= maxHuntersCount){
+                return;
+            }
+
             var hunter = hunterComponent.createObject(main);
             hunter.target = duck;
             hunter.anchors.bottom = main.bottom;
             hunter.x = Random.getRandomElementOfArray([0, main.width - hunter.width]);
             hunters.push(hunter);
             hunter.state = "MOVE";
+            huntersCount++;
             hunter.die.connect(function(){
                 points += hunter.points;
+                huntersCount--;
             })
         }
     }
