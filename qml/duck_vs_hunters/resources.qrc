@@ -26,5 +26,8 @@
         <file>images/light_shot.png</file>
         <file>images/real_bullet.png</file>
         <file>images/shit.png</file>
+        <file>HealthBar.qml</file>
+        <file>Heart.qml</file>
+        <file>images/heart.png</file>
     </qresource>
 </RCC>

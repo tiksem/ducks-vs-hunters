@@ -114,6 +114,13 @@ Rectangle {
         color: Qt.red
     }
 
+    HealthBar {
+        maxHitPoints: duck.maxHP
+        hitPoints: duck.hp
+        anchors.top: main.top
+        anchors.right: records.left
+    }
+
     MouseArea {
         x: 0
         width: main.width / 2

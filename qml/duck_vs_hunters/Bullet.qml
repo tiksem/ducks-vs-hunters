@@ -7,7 +7,7 @@ Image {
     property double movementSpeed: 0.5;
     property int distance: -1000;
     property var targets: [];
-    property int damage: 10;
+    property int damage: 1;
     property int radius: 8;
 
     width: 15

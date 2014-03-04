@@ -37,4 +37,6 @@ OTHER_FILES += \
     qml/duck_vs_hunters/GameOver.qml \
     qml/duck_vs_hunters/Hunter.qml \
     qml/duck_vs_hunters/Main.qml \
-    qml/duck_vs_hunters/Game.qml
+    qml/duck_vs_hunters/Game.qml \
+    qml/duck_vs_hunters/Heart.qml \
+    qml/duck_vs_hunters/HealthBar.qml
