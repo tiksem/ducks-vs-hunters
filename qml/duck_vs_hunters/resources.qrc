@@ -30,5 +30,9 @@
         <file>Heart.qml</file>
         <file>images/heart.png</file>
         <file>ComboDisplayer.qml</file>
+        <file>sounds/shit.mp3</file>
+        <file>sounds/power_shoot.mp3</file>
+        <file>sounds/hunter_shoot.mp3</file>
+        <file>HunterBullet.qml</file>
     </qresource>
 </RCC>

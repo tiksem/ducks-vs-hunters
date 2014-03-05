@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtMultimedia 5.0
 import "geom.js" as Geom
 import "game.js" as Game
 
@@ -9,6 +10,7 @@ Image {
     property var targets: [];
     property int damage: 1;
     property int radius: 8;
+    property Audio sound: null;
 
     width: 15
     height: 15
@@ -77,6 +79,10 @@ Image {
         var duration = moveByX.duration = moveByY.duration = Math.abs(distance) / movementSpeed;
         moveByX.running = moveByY.running = true;
         bullet.destroy(duration);
+
+        if(sound){
+            sound.play();
+        }
     }
 }
 

@@ -55,12 +55,19 @@ Rectangle {
         duck.hp += count - 1;
     }
 
+    Component {
+        id: hunterComponent;
+
+        Hunter {
+
+        }
+    }
+
     Timer {
         id: hunterFactory
         interval: 100
         running: true
         repeat: true
-        property var hunterComponent: Qt.createComponent("Hunter.qml");
 
         property var hunters: []
         property int maxHuntersCount: 5;

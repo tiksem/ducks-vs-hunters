@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtMultimedia 5.0
 
 AnimatedSprite {
     id: duck
@@ -147,6 +148,11 @@ AnimatedSprite {
         fireWithAngle(Math.PI / 2 * 3)
     }
 
+    Audio {
+        id: powerShootSound
+        source: "sounds/power_shoot.mp3"
+    }
+
     function blockedAssFire(){
         for(var angle = Math.PI + Math.PI / 4;
             angle < Math.PI / 2 * 3 + Math.PI / 4 + 0.01;
@@ -154,6 +160,8 @@ AnimatedSprite {
         {
             fireWithAngle(angle);
         }
+
+        powerShootSound.play();
     }
 
     onHpChanged: {
