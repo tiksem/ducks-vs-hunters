@@ -156,6 +156,12 @@ AnimatedSprite {
         }
     }
 
+    onHpChanged: {
+        if(hp > maxHP){
+            hp = maxHP;
+        }
+    }
+
     Keys.onLeftPressed: {
         if(!event.isAutoRepeat){
             state = "LEFT"

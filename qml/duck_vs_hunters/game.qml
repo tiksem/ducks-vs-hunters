@@ -41,6 +41,11 @@ Rectangle {
         id: comboDisplayer
     }
 
+    function onCombo(count){
+        comboDisplayer.displayCombo(count);
+        duck.hp += count - 1;
+    }
+
     Timer {
         id: hunterFactory
         interval: 100
@@ -55,6 +60,7 @@ Rectangle {
 
         property var lastHunterDeathTime: 0;
         property int comboDetected: 1;
+        property bool stopComboCalculation: false;
 
         onTriggered: {
             if(huntersCount >= maxHuntersCount){
@@ -71,13 +77,27 @@ Rectangle {
             hunter.die.connect(function(){
                 points += hunter.points;
                 huntersCount--;
+
+                if(stopComboCalculation){
+                    return;
+                }
+
                 var now = Date.now();
                 console.log("now = " + now);
                 if(now - lastHunterDeathTime <= comboDelay){
                     comboDetected++;
-                    comboDisplayer.displayCombo(comboDetected);
+                    onCombo(comboDetected);
                 } else {
                     comboDetected = 1;
+                }
+
+                if(comboDetected >= 5){
+                    comboDetected = 1;
+                    lastHunterDeathTime = 0;
+                    stopComboCalculation = true;
+                    Utils.executeAfterDelay(main, function(){
+                       stopComboCalculation = false;
+                    }, comboDelay)
                 }
 
                 lastHunterDeathTime = now;
