@@ -25,6 +25,15 @@ Rectangle {
         }
     }
 
+    HealthBar {
+        maxHitPoints: duck.maxHP
+        hitPoints: duck.hp
+        anchors.top: main.top
+        anchors.right: records.left
+        anchors.topMargin: 10
+        anchors.rightMargin: 10
+    }
+
     Duck {
         id: duck
         x: 0
@@ -149,13 +158,6 @@ Rectangle {
         font.family: "Verdana"
         font.pixelSize: 50
         color: Qt.red
-    }
-
-    HealthBar {
-        maxHitPoints: duck.maxHP
-        hitPoints: duck.hp
-        anchors.top: main.top
-        anchors.right: records.left
     }
 
     MouseArea {
