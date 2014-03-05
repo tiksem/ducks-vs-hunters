@@ -52,7 +52,7 @@ Rectangle {
 
     function onCombo(count){
         comboDisplayer.displayCombo(count);
-        duck.hp += count - 1;
+        duck.hp++;
     }
 
     Component {
