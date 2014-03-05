@@ -83,7 +83,6 @@ Rectangle {
                 }
 
                 var now = Date.now();
-                console.log("now = " + now);
                 if(now - lastHunterDeathTime <= comboDelay){
                     comboDetected++;
                     onCombo(comboDetected);
@@ -101,7 +100,6 @@ Rectangle {
                 }
 
                 lastHunterDeathTime = now;
-                console.log("lastHunterDeathTime = " + lastHunterDeathTime);
             })
         }
     }
