@@ -14,5 +14,6 @@ Bullet {
     sound: Audio {
         source: "sounds/shit.mp3"
         volume: 0.5
+        autoLoad: true
     }
 }

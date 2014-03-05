@@ -1,3 +1,5 @@
+QT += multimedia
+
 # Add more folders to ship with the application, here
 folder_01.source = qml/duck_vs_hunters
 folder_01.target = qml
@@ -24,6 +26,7 @@ QMAKE_CXXFLAGS += -std=c++11
 
 RESOURCES += qml/duck_vs_hunters/resources.qrc
 QT += quick
+QT += multimedia
 
 OTHER_FILES += \
     qml/duck_vs_hunters/file.js \
