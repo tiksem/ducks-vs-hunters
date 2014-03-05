@@ -63,14 +63,13 @@ Rectangle {
         }
     }
 
-    Timer {
+    QtObject {
         id: hunterFactoryIntervalLogic
         property real k: 1.5;
-        property real increment: 0.5;
-        interval: 1000;
+        property real incrementValue: 0.2;
 
-        onTriggered: {
-            k += increment;
+        function increment(){
+            k += incrementValue;
         }
     }
 
@@ -81,7 +80,7 @@ Rectangle {
         repeat: true
 
         property var hunters: []
-        property int maxHuntersCount: 15;
+        property int maxHuntersCount: 8;
         property int huntersCount: 0;
         property int comboDelay: 700;
 
@@ -118,6 +117,7 @@ Rectangle {
             points += hunter.points;
             huntersCount--;
             updateComboStats();
+            hunterFactoryIntervalLogic.increment();
         }
 
         onTriggered: {
