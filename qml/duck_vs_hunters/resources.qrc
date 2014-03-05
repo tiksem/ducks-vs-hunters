@@ -29,5 +29,6 @@
         <file>HealthBar.qml</file>
         <file>Heart.qml</file>
         <file>images/heart.png</file>
+        <file>ComboDisplayer.qml</file>
     </qresource>
 </RCC>

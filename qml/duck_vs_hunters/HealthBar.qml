@@ -39,6 +39,10 @@ Rectangle {
 
     onHitPointsChanged: {
         var hearts = internal.hearts;
+        if(!hearts){
+            return;
+        }
+
         var len = hearts.length;
         for(var i = 0; i < len; i++){
             var heart = hearts[i];

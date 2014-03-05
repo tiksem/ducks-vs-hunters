@@ -4,8 +4,8 @@ AnimatedSprite {
     id: duck
     property double movementSpeed: 0.3;
     property int radius: 50;
-    property int maxHP: 5;
-    property int hp: 5;
+    property int maxHP: 10;
+    property int hp: 10;
     property var targets: [];
     property point assPosition: Qt.point(70, 120);
     property int assRadius: 5;

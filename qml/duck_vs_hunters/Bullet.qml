@@ -14,8 +14,6 @@ Image {
     height: 15
     source: "images/real_bullet.png"
 
-    signal combo(int count);
-
     NumberAnimation on x {
         id: moveByX;
         running: false;
@@ -48,15 +46,6 @@ Image {
         return false;
     }
 
-    function checkForCombo(killedTargetsPerShoot){
-        if(killedTargetsPerShoot <= 1){
-            return;
-        }
-
-        console.log("combo detected");
-        combo(killedTargetsPerShoot);
-    }
-
     Timer {
         id: collisionTest
         repeat: true;
@@ -64,7 +53,6 @@ Image {
         interval: 50
 
         onTriggered: {
-            var killedTargetsPerShoot = 0;
             var targetReached = false;
             for(var i in targets){
                 var target = targets[i];
@@ -72,14 +60,8 @@ Image {
                     if(tryCollideWithTarget(target)){
                         targetReached = true;
                     }
-
-                    if(!target || target.hp <= 0){
-                        killedTargetsPerShoot++;
-                    }
                 }
             }
-
-            checkForCombo(killedTargetsPerShoot);
 
             if(targetReached){
                 bullet.destroy();
