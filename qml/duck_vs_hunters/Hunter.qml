@@ -8,7 +8,7 @@ Item {
     property double movementSpeed: 0.3; // in pixels per millisecond
     property var bulletAngles: MathUtils.generateArrayFromRange(MathUtils.deegresToRadians(45),
                                                                 MathUtils.deegresToRadians(70),
-                                                                animation.sprites[2].framesCount);
+                                                                55 - 31);
     property var target: undefined;
     property int hp: 1;
     property int radius: 60;
