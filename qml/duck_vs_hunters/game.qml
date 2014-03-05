@@ -56,26 +56,62 @@ Rectangle {
     }
 
     Component {
-        id: hunterComponent;
+        id: lightHunterComponent;
 
         Hunter {
+            hp: 1
+            image: "images/light_hunter.png"
+        }
+    }
 
+    Component {
+        id: middleHunterComponent;
+
+        Hunter {
+            hp: 2
+            image: "images/middle_hunter.png"
+        }
+    }
+
+    Component {
+        id: hardHunterComponent;
+
+        Hunter {
+            hp: 3
+            image: "images/hard_hunter.png"
         }
     }
 
     QtObject {
-        id: hunterFactoryIntervalLogic
+        id: hunterFactoryLogic
         property real k: 1.5;
         property real incrementValue: 0.2;
 
-        function increment(){
+        property real lightHunterProbability: 1.0;
+        property real middleHunterProbability: 0.0;
+        property real hardHunterProbability: 0.0;
+
+        property real middleHunterProbabilityIncrement: 0.01;
+        property real hardHunterProbabilityIncrement: 0.005;
+
+        function increaseFactorySpeed(){
             k += incrementValue;
+        }
+
+        function increaseDifficulty(){
+            middleHunterProbability += middleHunterProbabilityIncrement * (1 - middleHunterProbability);
+            hardHunterProbability += hardHunterProbabilityIncrement * (1 - hardHunterProbability);
+
+            var sum = lightHunterProbability + middleHunterProbability + hardHunterProbability;
+            lightHunterProbability /= sum;
+            middleHunterProbability /= sum;
+            hardHunterProbability /= sum;
         }
     }
 
     Timer {
         id: hunterFactory
-        interval: 1000 / Math.log(hunterFactoryIntervalLogic.k);
+        interval: 1000 / Math.log(hunterFactoryLogic.k);
         running: true
         repeat: true
 
@@ -117,7 +153,28 @@ Rectangle {
             points += hunter.points;
             huntersCount--;
             updateComboStats();
-            hunterFactoryIntervalLogic.increment();
+            hunterFactoryLogic.increaseFactorySpeed();
+            hunterFactoryLogic.increaseDifficulty();
+        }
+
+        function createHunter(){
+            var component = getHunterComponent();
+            return component.createObject(main);
+        }
+
+        function getHunterComponent(){
+            var rand = Math.random();
+            var sum = hunterFactoryLogic.lightHunterProbability;
+            if(rand <= sum){
+                return lightHunterComponent;
+            }
+
+            sum += hunterFactoryLogic.middleHunterProbability;
+            if(rand <= sum){
+                return middleHunterComponent;
+            }
+
+            return hardHunterComponent;
         }
 
         onTriggered: {
@@ -125,7 +182,7 @@ Rectangle {
                 return;
             }
 
-            var hunter = hunterComponent.createObject(main);
+            var hunter = createHunter();
             hunter.target = duck;
             hunter.anchors.bottom = main.bottom;
             hunter.x = Random.getRandomElementOfArray([0, main.width - hunter.width]);

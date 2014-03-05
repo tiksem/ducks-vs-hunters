@@ -13,6 +13,7 @@ Item {
     property int hp: 1;
     property int radius: 60;
     property int points: 10;
+    property string image: "images/light_hunter.png";
 
     SpriteSequence {
         id: animation
@@ -26,7 +27,7 @@ Item {
             frameRate: 30
             frameHeight: 150
             frameWidth: 120
-            source: "images/light_hunter.png"
+            source: image
         }
         Sprite {
             name: "death"
@@ -35,7 +36,7 @@ Item {
             frameHeight: 150
             frameWidth: 120
             frameX: 120 * 56
-            source: "images/light_hunter.png"
+            source: image
         }
         Sprite {
             name: "fire"
@@ -44,7 +45,7 @@ Item {
             frameHeight: 150
             frameWidth: 120
             frameX: 120 * 31
-            source: "images/light_hunter.png"
+            source: image
         }
     }
 
