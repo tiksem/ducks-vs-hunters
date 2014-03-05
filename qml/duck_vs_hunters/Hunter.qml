@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import "random.js" as Random
 
-AnimatedSprite {
+Item {
     id: hunter
     property double movementSpeed: 0.3; // in pixels per millisecond
     property var bulletAngles: [Math.PI / 2, Math.PI / 4, Math.PI / 2 + Math.PI / 4]
@@ -10,14 +10,33 @@ AnimatedSprite {
     property int radius: 60;
     property int points: 10;
 
-    frameCount: 30
-    frameRate: 30
-    frameHeight: 150
-    frameWidth: 120
+    SpriteSequence {
+        id: animation
+        running: true
+        width: 120
+        height: 150
+        interpolate: true;
+        Sprite {
+            name: "run"
+            frameCount: 30
+            frameRate: 30
+            frameHeight: 150
+            frameWidth: 120
+            source: "images/light_hunter.png"
+        }
+        Sprite {
+            name: "death"
+            frameCount: 24
+            frameRate: 30
+            frameHeight: 150
+            frameWidth: 120
+            frameX: 120 * 56
+            source: "images/light_hunter.png"
+        }
+    }
+
     width: 120
     height: 150
-    running: true
-    source: "images/light_hunter.png"
     state: "IDLE"
 
     property bool rotated: false;
@@ -34,40 +53,16 @@ AnimatedSprite {
 
     function changeStateAfterDelay(newState, delay){
         Utils.executeAfterDelay(hunter, function(){
+            if(hunter.state == "DIE"){
+                return;
+            }
+
             hunter.state = newState;
         }, delay);
     }
 
-    Component {
-        id: deathAnimation
-
-        AnimatedSprite {
-            frameCount: 30
-            frameRate: 30
-            frameHeight: hunter.frameHeight
-            frameWidth: hunter.frameWidth
-
-            width: hunter.width
-            height: hunter.height
-            running: true
-            source: "images/light_die.png"
-
-            x: hunter.x;
-            y: hunter.y;
-
-            transform: Rotation {
-                origin.x: hunter.width / 2
-                origin.y: hunter.height / 2
-                axis.x: 0; axis.y: rotated ? 1 : 0; axis.z: 0     // set axis.x to 1 to rotate around y-axis
-                angle: 180    // the default angle
-            }
-        }
-    }
-
     onDie: {
-        var death = deathAnimation.createObject(hunter.parent);
-        death.destroy(death.frameCount / death.frameRate * 1000)
-        destroy();
+        state = "DIE";
     }
 
     Component {
@@ -85,6 +80,20 @@ AnimatedSprite {
                 script: {
                     moving.move();
                     changeStateAfterDelay("FIRE", Random.randomIntFromInterval(200, 1800));
+                }
+            }
+        },
+
+        State {
+            name: "DIE"
+
+            StateChangeScript {
+                script: {
+                    animation.jumpTo("death");
+                    var death = animation.sprites[1];
+                    console.log("time = " + death.frameCount / death.frameRate * 1000);
+                    hunter.destroy(death.frameCount / death.frameRate * 1000);
+                    moving.stop();
                 }
             }
         },
