@@ -1,10 +1,14 @@
 import QtQuick 2.0
 import "random.js" as Random
+import "math.js" as MathUtils
+import "animation.js" as Animation
 
 Item {
     id: hunter
     property double movementSpeed: 0.3; // in pixels per millisecond
-    property var bulletAngles: [Math.PI / 2, Math.PI / 4, Math.PI / 2 + Math.PI / 4]
+    property var bulletAngles: MathUtils.generateArrayFromRange(MathUtils.deegresToRadians(45),
+                                                                MathUtils.deegresToRadians(70),
+                                                                animation.sprites[2].framesCount);
     property var target: undefined;
     property int hp: 1;
     property int radius: 60;
@@ -31,6 +35,15 @@ Item {
             frameHeight: 150
             frameWidth: 120
             frameX: 120 * 56
+            source: "images/light_hunter.png"
+        }
+        Sprite {
+            name: "fire"
+            frameCount: 55 - 31
+            frameRate: 30
+            frameHeight: 150
+            frameWidth: 120
+            frameX: 120 * 31
             source: "images/light_hunter.png"
         }
     }
@@ -78,6 +91,7 @@ Item {
             name: "MOVE"
             StateChangeScript {
                 script: {
+                    animation.jumpTo("run");
                     moving.move();
                     changeStateAfterDelay("FIRE", Random.randomIntFromInterval(200, 1800));
                 }
@@ -103,15 +117,25 @@ Item {
 
             StateChangeScript {
                 script: {
-                    var bullet = bulletComponent.createObject(hunter.parent, {
-                                                                  x: hunter.x,
-                                                                  y: hunter.y,
-                                                                  targets: [target]
-                                                              });
-                    var angle = Random.getRandomElementOfArray(bulletAngles);
-                    bullet.move(angle);
+                    var bulletPosition = Random.randomInt(bulletAngles.length);
+                    var angle = bulletAngles[bulletPosition];
+                    if(!rotated){
+                        angle = Math.PI - angle;
+                    }
+
                     moving.stop();
-                    changeStateAfterDelay("MOVE", 500);
+                    var animationDuration = Animation.getDuration(animation.sprites[2].frameRate, bulletPosition);
+                    animation.jumpTo("fire");
+
+                    Utils.executeAfterDelay(hunter, function(){
+                        var bullet = bulletComponent.createObject(hunter.parent, {
+                                                                      x: hunter.x,
+                                                                      y: hunter.y,
+                                                                      targets: [target]
+                                                                  });
+                        bullet.move(angle);
+                        changeStateAfterDelay("MOVE", 500);
+                    }, animationDuration)
                 }
             }
         }

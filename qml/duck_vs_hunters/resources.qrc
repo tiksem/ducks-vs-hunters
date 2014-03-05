@@ -34,5 +34,7 @@
         <file>sounds/power_shoot.mp3</file>
         <file>sounds/hunter_shoot.mp3</file>
         <file>HunterBullet.qml</file>
+        <file>math.js</file>
+        <file>animation.js</file>
     </qresource>
 </RCC>

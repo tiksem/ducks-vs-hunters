@@ -41,4 +41,6 @@ OTHER_FILES += \
     qml/duck_vs_hunters/Heart.qml \
     qml/duck_vs_hunters/HealthBar.qml \
     qml/duck_vs_hunters/ComboDisplayer.qml \
-    qml/duck_vs_hunters/HunterBullet.qml
+    qml/duck_vs_hunters/HunterBullet.qml \
+    qml/duck_vs_hunters/math.js \
+    qml/duck_vs_hunters/animation.js
