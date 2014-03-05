@@ -15,6 +15,8 @@ Item {
     property int points: 10;
     property string image: "images/light_hunter.png";
 
+    property int level: 1;
+
     SpriteSequence {
         id: animation
         running: true

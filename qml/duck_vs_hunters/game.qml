@@ -69,6 +69,7 @@ Rectangle {
 
         Hunter {
             hp: 2
+            level: 2
             image: "images/middle_hunter.png"
         }
     }
@@ -78,6 +79,7 @@ Rectangle {
 
         Hunter {
             hp: 3
+            level: 3
             image: "images/hard_hunter.png"
         }
     }
@@ -91,8 +93,8 @@ Rectangle {
         property real middleHunterProbability: 0.0;
         property real hardHunterProbability: 0.0;
 
-        property real middleHunterProbabilityIncrement: 0.01;
-        property real hardHunterProbabilityIncrement: 0.005;
+        property real middleHunterProbabilityIncrement: 0.005;
+        property real hardHunterProbabilityIncrement: 0.0025;
 
         function increaseFactorySpeed(){
             k += incrementValue;
@@ -117,7 +119,13 @@ Rectangle {
 
         property var hunters: []
         property int maxHuntersCount: 8;
+        property int maxHardHuntersCount: 2;
+        property int maxMiddleHuntersCount: 3;
+
         property int huntersCount: 0;
+        property int middleHuntersCount: 0;
+        property int hardHuntersCount: 0;
+
         property int comboDelay: 700;
 
         property var lastHunterDeathTime: 0;
@@ -155,6 +163,12 @@ Rectangle {
             updateComboStats();
             hunterFactoryLogic.increaseFactorySpeed();
             hunterFactoryLogic.increaseDifficulty();
+
+            if(hunter.level === 2){
+                middleHuntersCount--;
+            } else if(hunter.level === 3) {
+                hardHuntersCount--;
+            }
         }
 
         function createHunter(){
@@ -165,15 +179,27 @@ Rectangle {
         function getHunterComponent(){
             var rand = Math.random();
             var sum = hunterFactoryLogic.lightHunterProbability;
+            huntersCount++;
+
             if(rand <= sum){
                 return lightHunterComponent;
             }
 
             sum += hunterFactoryLogic.middleHunterProbability;
             if(rand <= sum){
+                if(middleHuntersCount >= maxMiddleHuntersCount){
+                    return lightHunterComponent;
+                }
+
+                middleHuntersCount++;
                 return middleHunterComponent;
             }
 
+            if(hardHuntersCount >= maxHardHuntersCount){
+                return lightHunterComponent;
+            }
+
+            hardHuntersCount++;
             return hardHunterComponent;
         }
 
@@ -188,7 +214,6 @@ Rectangle {
             hunter.x = Random.getRandomElementOfArray([0, main.width - hunter.width]);
             hunters.push(hunter);
             hunter.state = "MOVE";
-            huntersCount++;
 
             hunter.die.connect(function(){
                 onHunterDie(hunter);
