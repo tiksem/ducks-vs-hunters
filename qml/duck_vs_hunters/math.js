@@ -1,7 +1,7 @@
 function generateArrayFromRange(a, b, length) {
     var result = [];
 
-    var increment = (length - 1) / (b - a);
+    var increment = (b - a) / (length - 1);
     var value = a + increment;
 
     result[0] = a;

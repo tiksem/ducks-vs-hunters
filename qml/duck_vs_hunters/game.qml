@@ -64,19 +64,61 @@ Rectangle {
     }
 
     Timer {
+        id: hunterFactoryIntervalLogic
+        property real k: 1.5;
+        property real increment: 0.5;
+        interval: 1000;
+
+        onTriggered: {
+            k += increment;
+        }
+    }
+
+    Timer {
         id: hunterFactory
-        interval: 100
+        interval: 1000 / Math.log(hunterFactoryIntervalLogic.k);
         running: true
         repeat: true
 
         property var hunters: []
-        property int maxHuntersCount: 5;
+        property int maxHuntersCount: 15;
         property int huntersCount: 0;
         property int comboDelay: 700;
 
         property var lastHunterDeathTime: 0;
         property int comboDetected: 1;
         property bool stopComboCalculation: false;
+
+        function updateComboStats(){
+            if(stopComboCalculation){
+                return;
+            }
+
+            var now = Date.now();
+            if(now - lastHunterDeathTime <= comboDelay){
+                comboDetected++;
+                onCombo(comboDetected);
+            } else {
+                comboDetected = 1;
+            }
+
+            if(comboDetected >= 5){
+                comboDetected = 1;
+                lastHunterDeathTime = 0;
+                stopComboCalculation = true;
+                Utils.executeAfterDelay(main, function(){
+                   stopComboCalculation = false;
+                }, comboDelay)
+            }
+
+            lastHunterDeathTime = now;
+        }
+
+        function onHunterDie(hunter){
+            points += hunter.points;
+            huntersCount--;
+            updateComboStats();
+        }
 
         onTriggered: {
             if(huntersCount >= maxHuntersCount){
@@ -90,33 +132,10 @@ Rectangle {
             hunters.push(hunter);
             hunter.state = "MOVE";
             huntersCount++;
+
             hunter.die.connect(function(){
-                points += hunter.points;
-                huntersCount--;
-
-                if(stopComboCalculation){
-                    return;
-                }
-
-                var now = Date.now();
-                if(now - lastHunterDeathTime <= comboDelay){
-                    comboDetected++;
-                    onCombo(comboDetected);
-                } else {
-                    comboDetected = 1;
-                }
-
-                if(comboDetected >= 5){
-                    comboDetected = 1;
-                    lastHunterDeathTime = 0;
-                    stopComboCalculation = true;
-                    Utils.executeAfterDelay(main, function(){
-                       stopComboCalculation = false;
-                    }, comboDelay)
-                }
-
-                lastHunterDeathTime = now;
-            })
+                onHunterDie(hunter);
+            });
         }
     }
 
