@@ -9,7 +9,7 @@ Rectangle {
     property string screenBackground: "images/background.jpg"
     property string screenForeground: "images/foreground.jpg"
 
-    state: "GAME"
+    state: "MENU"
 
     //transform: Scale { xScale: screenSize.width / width; yScale: screenSize.height / height}
 
@@ -50,6 +50,10 @@ Rectangle {
         GameStart {
             background: screenBackground
             foreground: screenForeground
+
+            onStartGame: {
+                main.state = "GAME"
+            }
         }
     }
 
