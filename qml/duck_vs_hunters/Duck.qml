@@ -11,6 +11,7 @@ AnimatedSprite {
     property point assPosition: Qt.point(70, 120);
     property int assRadius: 5;
     property int assBlockingDuration: 5000;
+    property point center: Qt.point(70, 70);
 
     frameCount: 25
     frameRate: 40

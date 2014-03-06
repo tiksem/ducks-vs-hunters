@@ -22,6 +22,14 @@ function getItemCenterY(item){
 }
 
 function getItemCenter(item){
+    var center = item.center;
+    if(center){
+        return {
+            x: item.x + center.x,
+            y: item.y + center.y
+        }
+    }
+
     return {
         x: getItemCenterX(item),
         y: getItemCenterY(item)
