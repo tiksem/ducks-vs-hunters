@@ -46,4 +46,5 @@ OTHER_FILES += \
     qml/duck_vs_hunters/ComboDisplayer.qml \
     qml/duck_vs_hunters/HunterBullet.qml \
     qml/duck_vs_hunters/math.js \
-    qml/duck_vs_hunters/animation.js
+    qml/duck_vs_hunters/animation.js \
+    qml/duck_vs_hunters/array.js

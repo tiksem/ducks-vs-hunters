@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import "random.js" as Random
 import "file.js" as File
+import "array.js" as Array
 
 Rectangle {
     id: main
@@ -159,8 +160,12 @@ Rectangle {
 
         function onHunterDie(hunter){
             points += hunter.points;
+
             huntersCount--;
+            Array.findAndRemove(hunters, hunter);
+
             updateComboStats();
+
             hunterFactoryLogic.increaseFactorySpeed();
             hunterFactoryLogic.increaseDifficulty();
 
@@ -218,6 +223,10 @@ Rectangle {
             hunter.die.connect(function(){
                 onHunterDie(hunter);
             });
+
+            if(Array.count(hunters) > maxHuntersCount){
+                console.error("Array.count(hunters) > maxHuntersCount");
+            }
         }
     }
 
@@ -275,10 +284,12 @@ Rectangle {
 
         onPressed: {
             duck.state = "LEFT"
+            console.log("onPressed");
         }
 
         onReleased: {
             duck.state = "STOP"
+            console.log("onReleased");
         }
     }
 
@@ -289,10 +300,12 @@ Rectangle {
 
         onPressed: {
             duck.state = "RIGHT"
+            console.log("onPressed");
         }
 
         onReleased: {
             duck.state = "STOP"
+            console.log("onReleased");
         }
     }
 }

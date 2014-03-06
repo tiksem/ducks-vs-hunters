@@ -8,7 +8,7 @@ Rectangle {
 
     state: "GAME"
 
-    transform: Scale { xScale: screenSize.width / width; yScale: screenSize.height / height}
+    //transform: Scale { xScale: screenSize.width / width; yScale: screenSize.height / height}
 
     Loader {
         id: screenLoader
