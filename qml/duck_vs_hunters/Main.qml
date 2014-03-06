@@ -37,6 +37,19 @@ Rectangle {
         GameOver {
             background: screenBackground
             foreground: screenForeground
+
+            onFinished: {
+                main.state = "MENU"
+            }
+        }
+    }
+
+    Component {
+        id: gameMenu
+
+        GameStart {
+            background: screenBackground
+            foreground: screenForeground
         }
     }
 
@@ -55,6 +68,15 @@ Rectangle {
             StateChangeScript {
                 script: {
                     screenLoader.sourceComponent = gameOver;
+                }
+            }
+        },
+
+        State {
+            name: "MENU"
+            StateChangeScript {
+                script: {
+                    screenLoader.sourceComponent = gameMenu;
                 }
             }
         }

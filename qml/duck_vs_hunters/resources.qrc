@@ -41,5 +41,6 @@
         <file>SeveralAnimationsDisplayer.qml</file>
         <file>GameStart.qml</file>
         <file>images/foreground.jpg</file>
+        <file>images/menu.png</file>
     </qresource>
 </RCC>

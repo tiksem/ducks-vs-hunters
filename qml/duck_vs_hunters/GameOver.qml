@@ -26,30 +26,48 @@ Rectangle {
             to: 1;
             duration: 800
             running: true
-
-            onStopped: {
-                finished();
-            }
         }
     }
 
     Text {
+        id: text
         anchors.centerIn: parent
         text: qsTr("Game Over")
         font.family: "Verdana"
         font.pixelSize: 120
-        opacity: 0.5
+        opacity: 0.1
 
-        NumberAnimation on font.pixelSize {
-            to: 100
-            duration: 800
-            running: true;
-        }
+        SequentialAnimation {
+            running: true
 
-        NumberAnimation on opacity {
-            to: 1
-            duration: 800
-            running: true;
+            ParallelAnimation {
+                NumberAnimation {
+                    target: text
+                    property: "opacity"
+                    to: 0.5
+                    duration: 800
+                }
+
+                NumberAnimation {
+                    target: text
+                    property: "font.pixelSize"
+                    to: 100
+                    duration: 800
+                }
+            }
+
+            PauseAnimation { duration: 800 }
+
+            NumberAnimation {
+                target: text
+                property: "opacity"
+                to: 0
+                duration: 400
+            }
+
+            onStopped: {
+                finished();
+            }
         }
     }
 }
