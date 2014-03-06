@@ -46,4 +46,11 @@ OTHER_FILES += \
     qml/duck_vs_hunters/ComboDisplayer.qml \
     qml/duck_vs_hunters/HunterBullet.qml \
     qml/duck_vs_hunters/math.js \
-    qml/duck_vs_hunters/animation.js
+    qml/duck_vs_hunters/animation.js \
+    qml/duck_vs_hunters/array.js \
+    qml/duck_vs_hunters/utils.js \
+    qml/duck_vs_hunters/GameStart.qml \
+    qml/duck_vs_hunters/SeveralAnimationsDisplayer.qml \
+    android/AndroidManifest.xml
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

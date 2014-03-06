@@ -36,5 +36,11 @@
         <file>animation.js</file>
         <file>images/hard_hunter.png</file>
         <file>images/middle_hunter.png</file>
+        <file>array.js</file>
+        <file>utils.js</file>
+        <file>SeveralAnimationsDisplayer.qml</file>
+        <file>GameStart.qml</file>
+        <file>images/foreground.jpg</file>
+        <file>images/menu.png</file>
     </qresource>
 </RCC>

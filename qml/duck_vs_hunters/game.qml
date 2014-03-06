@@ -1,12 +1,15 @@
 import QtQuick 2.0
 import "random.js" as Random
 import "file.js" as File
+import "array.js" as Array
 
 Rectangle {
     id: main
 
     width: parent.width
     height: parent.height
+
+    property string background: "";
 
     property int points: 0;
 
@@ -15,7 +18,7 @@ Rectangle {
     Image {
         width: parent.width
         height: parent.height
-        source: "images/background.jpg"
+        source: background
     }
 
     MouseArea {
@@ -159,8 +162,12 @@ Rectangle {
 
         function onHunterDie(hunter){
             points += hunter.points;
+
             huntersCount--;
+            Array.findAndRemove(hunters, hunter);
+
             updateComboStats();
+
             hunterFactoryLogic.increaseFactorySpeed();
             hunterFactoryLogic.increaseDifficulty();
 
@@ -218,6 +225,10 @@ Rectangle {
             hunter.die.connect(function(){
                 onHunterDie(hunter);
             });
+
+            if(Array.count(hunters) > maxHuntersCount){
+                console.error("Array.count(hunters) > maxHuntersCount");
+            }
         }
     }
 
@@ -275,10 +286,12 @@ Rectangle {
 
         onPressed: {
             duck.state = "LEFT"
+            console.log("onPressed");
         }
 
         onReleased: {
             duck.state = "STOP"
+            console.log("onReleased");
         }
     }
 
@@ -289,10 +302,12 @@ Rectangle {
 
         onPressed: {
             duck.state = "RIGHT"
+            console.log("onPressed");
         }
 
         onReleased: {
             duck.state = "STOP"
+            console.log("onReleased");
         }
     }
 }

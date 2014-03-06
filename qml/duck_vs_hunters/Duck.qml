@@ -6,11 +6,12 @@ AnimatedSprite {
     property double movementSpeed: 0.3;
     property int radius: 50;
     property int maxHP: 10;
-    property int hp: 10;
+    property int hp: 1;
     property var targets: [];
     property point assPosition: Qt.point(70, 120);
     property int assRadius: 5;
     property int assBlockingDuration: 5000;
+    property point center: Qt.point(70, 70);
 
     frameCount: 25
     frameRate: 40

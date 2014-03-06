@@ -143,15 +143,59 @@ QString QMLUtils::readFromFile(QString path)
 
 void QMLUtils::writeToFile(QString path, QString content)
 {
-    QFile file(QCoreApplication::instance()->applicationDirPath() + '/' + path);
-    file.open(QIODevice::WriteOnly | QIODevice::Text);
-    QTextStream out(&file);
-    out<<content;
-
-    file.close();
+    QString filePath = QCoreApplication::instance()->applicationDirPath() + '/' + path;
+    QFile file(filePath);
+    if(file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QTextStream out(&file);
+        out<<content;
+        file.close();
+    }
+    qDebug()<<"file error = "<<file.errorString();
+    qDebug()<<"filePath = "<<filePath;
 }
 
 QJSValue QMLUtils::getGameState()
 {
     return gameState_;
+}
+
+void QMLUtils::pause(QObject* item)
+{
+    if(isPaused(item))
+    {
+        return;
+    }
+
+    QEvent e(QEvent::ApplicationDeactivate);
+    QCoreApplication::instance()->sendEvent(item, &e);
+    pausedItems.insert(item);
+}
+
+void QMLUtils::resume(QObject* item)
+{
+    if(!pausedItems.remove(item))
+    {
+        return;
+    }
+
+    QEvent e(QEvent::ApplicationActivate);
+    QCoreApplication::instance()->sendEvent(item, &e);
+}
+
+bool QMLUtils::isPaused(QObject* item)
+{
+    return pausedItems.contains(item);
+}
+
+void QMLUtils::triggerPausedState(QObject* item)
+{
+    if(isPaused(item))
+    {
+        resume(item);
+    }
+    else
+    {
+        pause(item);
+    }
 }

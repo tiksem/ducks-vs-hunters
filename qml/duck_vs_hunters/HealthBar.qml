@@ -35,9 +35,11 @@ Rectangle {
 
             hearts.push(heart);
         }
+
+        updateHitPoints();
     }
 
-    onHitPointsChanged: {
+    function updateHitPoints(){
         var hearts = internal.hearts;
         if(!hearts){
             return;
@@ -48,5 +50,9 @@ Rectangle {
             var heart = hearts[i];
             heart.visible = hitPoints > i;
         }
+    }
+
+    onHitPointsChanged: {
+        updateHitPoints();
     }
 }
