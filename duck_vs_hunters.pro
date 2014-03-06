@@ -50,4 +50,7 @@ OTHER_FILES += \
     qml/duck_vs_hunters/array.js \
     qml/duck_vs_hunters/utils.js \
     qml/duck_vs_hunters/GameStart.qml \
-    qml/duck_vs_hunters/SeveralAnimationsDisplayer.qml
+    qml/duck_vs_hunters/SeveralAnimationsDisplayer.qml \
+    android/AndroidManifest.xml
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

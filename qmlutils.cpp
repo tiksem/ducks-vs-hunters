@@ -143,12 +143,16 @@ QString QMLUtils::readFromFile(QString path)
 
 void QMLUtils::writeToFile(QString path, QString content)
 {
-    QFile file(QCoreApplication::instance()->applicationDirPath() + '/' + path);
-    file.open(QIODevice::WriteOnly | QIODevice::Text);
-    QTextStream out(&file);
-    out<<content;
-
-    file.close();
+    QString filePath = QCoreApplication::instance()->applicationDirPath() + '/' + path;
+    QFile file(filePath);
+    if(file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QTextStream out(&file);
+        out<<content;
+        file.close();
+    }
+    qDebug()<<"file error = "<<file.errorString();
+    qDebug()<<"filePath = "<<filePath;
 }
 
 QJSValue QMLUtils::getGameState()
