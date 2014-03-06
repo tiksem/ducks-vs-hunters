@@ -9,6 +9,8 @@ Rectangle {
     width: parent.width
     height: parent.height
 
+    property string background: "";
+
     property int points: 0;
 
     signal gameOver;
@@ -16,7 +18,7 @@ Rectangle {
     Image {
         width: parent.width
         height: parent.height
-        source: "images/background.jpg"
+        source: background
     }
 
     MouseArea {

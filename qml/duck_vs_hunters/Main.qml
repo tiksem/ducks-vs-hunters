@@ -6,6 +6,9 @@ Rectangle {
     width: 960
     height: 540
 
+    property string screenBackground: "images/background.jpg"
+    property string screenForeground: "images/foreground.jpg"
+
     state: "GAME"
 
     //transform: Scale { xScale: screenSize.width / width; yScale: screenSize.height / height}
@@ -20,6 +23,8 @@ Rectangle {
         id: game
 
         Game {
+            background: screenBackground
+
             onGameOver: {
                 main.state = "GAME_OVER";
             }
@@ -30,7 +35,8 @@ Rectangle {
         id: gameOver
 
         GameOver {
-
+            background: screenBackground
+            foreground: screenForeground
         }
     }
 

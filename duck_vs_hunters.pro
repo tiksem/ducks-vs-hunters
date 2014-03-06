@@ -48,4 +48,6 @@ OTHER_FILES += \
     qml/duck_vs_hunters/math.js \
     qml/duck_vs_hunters/animation.js \
     qml/duck_vs_hunters/array.js \
-    qml/duck_vs_hunters/utils.js
+    qml/duck_vs_hunters/utils.js \
+    qml/duck_vs_hunters/GameStart.qml \
+    qml/duck_vs_hunters/SeveralAnimationsDisplayer.qml
