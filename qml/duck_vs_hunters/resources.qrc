@@ -37,5 +37,6 @@
         <file>images/hard_hunter.png</file>
         <file>images/middle_hunter.png</file>
         <file>array.js</file>
+        <file>utils.js</file>
     </qresource>
 </RCC>

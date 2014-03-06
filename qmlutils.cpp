@@ -155,3 +155,43 @@ QJSValue QMLUtils::getGameState()
 {
     return gameState_;
 }
+
+void QMLUtils::pause(QObject* item)
+{
+    if(isPaused(item))
+    {
+        return;
+    }
+
+    QEvent e(QEvent::ApplicationDeactivate);
+    QCoreApplication::instance()->sendEvent(item, &e);
+    pausedItems.insert(item);
+}
+
+void QMLUtils::resume(QObject* item)
+{
+    if(!pausedItems.remove(item))
+    {
+        return;
+    }
+
+    QEvent e(QEvent::ApplicationActivate);
+    QCoreApplication::instance()->sendEvent(item, &e);
+}
+
+bool QMLUtils::isPaused(QObject* item)
+{
+    return pausedItems.contains(item);
+}
+
+void QMLUtils::triggerPausedState(QObject* item)
+{
+    if(isPaused(item))
+    {
+        resume(item);
+    }
+    else
+    {
+        pause(item);
+    }
+}
