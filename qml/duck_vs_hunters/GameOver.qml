@@ -62,7 +62,7 @@ Rectangle {
                 target: text
                 property: "opacity"
                 to: 0
-                duration: 400
+                duration: 1600
             }
 
             onStopped: {
