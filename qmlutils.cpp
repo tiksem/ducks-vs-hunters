@@ -138,21 +138,30 @@ QString QMLUtils::readFromFile(QString path)
         file.close();
     }
 
+    if(file.error() != QFile::NoError)
+    {
+        qDebug()<<"file error = "<<file.errorString();
+        qDebug()<<"filePath = "<<path;
+    }
+
     return fileContent;
 }
 
 void QMLUtils::writeToFile(QString path, QString content)
 {
-    QString filePath = path;
-    QFile file(filePath);
+    QFile file(path);
     if(file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         QTextStream out(&file);
         out<<content;
         file.close();
     }
-    qDebug()<<"file error = "<<file.errorString();
-    qDebug()<<"filePath = "<<filePath;
+
+    if(file.error() != QFile::NoError)
+    {
+        qDebug()<<"file error = "<<file.errorString();
+        qDebug()<<"filePath = "<<path;
+    }
 }
 
 QJSValue QMLUtils::getGameState()
