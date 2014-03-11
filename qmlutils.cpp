@@ -122,7 +122,7 @@ bool QMLUtils::collide(QJSValue a, QJSValue b)
 
 QString QMLUtils::readFromFile(QString path)
 {
-    QFile file(QCoreApplication::instance()->applicationDirPath() + '/' + path);
+    QFile file(path);
     QString fileContent;
 
     if(file.open(QIODevice::ReadOnly))
@@ -143,7 +143,7 @@ QString QMLUtils::readFromFile(QString path)
 
 void QMLUtils::writeToFile(QString path, QString content)
 {
-    QString filePath = QCoreApplication::instance()->applicationDirPath() + '/' + path;
+    QString filePath = path;
     QFile file(filePath);
     if(file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
