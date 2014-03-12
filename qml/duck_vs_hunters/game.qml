@@ -2,6 +2,7 @@ import QtQuick 2.0
 import "random.js" as Random
 import "file.js" as File
 import "array.js" as Array
+import QtMultimedia 5.0
 
 Rectangle {
     id: main
@@ -286,12 +287,10 @@ Rectangle {
 
         onPressed: {
             duck.state = "LEFT"
-            console.log("onPressed");
         }
 
         onReleased: {
             duck.state = "STOP"
-            console.log("onReleased");
         }
     }
 
@@ -302,12 +301,36 @@ Rectangle {
 
         onPressed: {
             duck.state = "RIGHT"
-            console.log("onPressed");
         }
 
         onReleased: {
             duck.state = "STOP"
-            console.log("onReleased");
+        }
+    }
+
+    Audio {
+        loops: Audio.Infinite
+        source: "sounds/background_song.mp3"
+        autoLoad: true
+        autoPlay: true
+        volume: 0.4
+        muted: !Utils.audioEnabled
+    }
+
+    Image {
+        source: Utils.audioEnabled ? "images/sound_on.png" : "images/sound_off.png"
+        anchors.top: records.bottom
+        anchors.right: parent.right
+
+        MouseArea {
+            width: parent.width
+            height: parent.height
+            anchors.top: parent.top
+            anchors.left: parent.left
+
+            onClicked: {
+                Utils.audioEnabled = !Utils.audioEnabled
+            }
         }
     }
 }

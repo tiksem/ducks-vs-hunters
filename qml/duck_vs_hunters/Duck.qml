@@ -152,6 +152,7 @@ AnimatedSprite {
     Audio {
         id: powerShootSound
         source: "sounds/power_shoot.mp3"
+        muted: Utils.audioEnabled
     }
 
     function blockedAssFire(){

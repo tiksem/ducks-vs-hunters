@@ -25,6 +25,7 @@ QMLUtils::QMLUtils(QQuickView* view, QObject *parent) :
     view(view)
 {
     gameState_ = view->rootContext()->engine()->newObject();
+    audioEnabled_ = readFromFile("audioDisabled") == "false";
 }
 
 void QMLUtils::executeAfterDelay(QJSValue parent, QJSValue callback, int delay)
@@ -207,4 +208,26 @@ void QMLUtils::triggerPausedState(QObject* item)
     {
         pause(item);
     }
+}
+
+static void setSoundEnabledRecursive(QObject* root, bool value)
+{
+    QUtils::setPropertyRecursive(root, "muted", value);
+}
+
+bool QMLUtils::isAudioEnabled()
+{
+    return audioEnabled_;
+}
+
+void QMLUtils::setAudioEnabled(bool value)
+{
+    if(value == audioEnabled_)
+    {
+        return;
+    }
+
+    emit audioEnabledChanged();
+    audioEnabled_ = value;
+    writeToFile("audioDisabled", value ? "true" : "false");
 }
