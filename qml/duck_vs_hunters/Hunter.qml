@@ -11,8 +11,8 @@ Item {
                                                                 55 - 31);
     property var target: undefined;
     property int hp: 1;
-    property int radius: 60;
-    property point center: Qt.point(75, 60);
+    property int radius: 26;
+    property point center: Qt.point(47, 45);
     property int points: 10;
     property string image: "images/light_hunter.png";
 
