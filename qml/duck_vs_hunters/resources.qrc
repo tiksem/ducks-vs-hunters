@@ -44,5 +44,7 @@
         <file>images/menu.png</file>
         <file>sounds/background_song.mp3</file>
         <file>sounds/damage.wav</file>
+        <file>images/about.jpg</file>
+        <file>About.qml</file>
     </qresource>
 </RCC>

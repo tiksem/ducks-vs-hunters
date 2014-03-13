@@ -53,6 +53,7 @@ OTHER_FILES += \
     qml/duck_vs_hunters/SeveralAnimationsDisplayer.qml \
     android/AndroidManifest.xml \
     qml/duck_vs_hunters/CheckBox.qml \
-    qml/duck_vs_hunters/MuteButton.qml
+    qml/duck_vs_hunters/MuteButton.qml \
+    qml/duck_vs_hunters/About.qml
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

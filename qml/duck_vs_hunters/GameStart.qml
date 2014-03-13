@@ -38,7 +38,7 @@ Rectangle {
     }
 
     function openAbout(){
-
+        about.open();
     }
 
     ParallelAnimation {
@@ -65,8 +65,9 @@ Rectangle {
     }
 
     MouseArea {
+        id: startGameButtonMouseArea
         width: parent.width
-        height: parent.height
+        height: parent.height / 2
 
         onClicked: {
             startGameAnimation.running = true;
@@ -74,11 +75,16 @@ Rectangle {
     }
 
     MouseArea {
-        width: 0;
-        height: 0;
+        width: parent.width
+        height: parent.height / 2
+        anchors.top: startGameButtonMouseArea.bottom
 
         onClicked: {
             openAbout();
         }
+    }
+
+    About {
+        id: about;
     }
 }
