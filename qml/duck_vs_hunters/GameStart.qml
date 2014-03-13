@@ -66,19 +66,20 @@ Rectangle {
 
     MouseArea {
         id: startGameButtonMouseArea
-        width: parent.width
-        height: parent.height / 2
-
+        width: parent.width/3.35
+        height: parent.height / 6.5
+        x:339
+        y:163
         onClicked: {
             startGameAnimation.running = true;
         }
     }
 
     MouseArea {
-        width: parent.width
-        height: parent.height / 2
-        anchors.top: startGameButtonMouseArea.bottom
-
+        width: parent.width/3.35
+        height: parent.height /6.5
+        x:339
+         y:284
         onClicked: {
             openAbout();
         }
