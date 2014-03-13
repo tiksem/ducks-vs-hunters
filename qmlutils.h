@@ -7,6 +7,7 @@
 #include <QQuickImageProvider>
 #include <QQuickView>
 #include <QSet>
+#include <QAudioOutput>
 
 class QMLUtils : public QObject
 {
@@ -23,10 +24,13 @@ public:
     Q_INVOKABLE void triggerPausedState(QObject* item);
     QJSValue getGameState();
     Q_PROPERTY(QJSValue gameState READ getGameState)
+
+    ~QMLUtils();
 private:
     QQuickView* view;
     QJSValue gameState_;
     QSet<QObject*> pausedItems;
+    QAudioOutput* audioOutput;
 signals:
 
 public slots:

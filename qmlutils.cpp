@@ -25,6 +25,9 @@ QMLUtils::QMLUtils(QQuickView* view, QObject *parent) :
     view(view)
 {
     gameState_ = view->rootContext()->engine()->newObject();
+    gameState_.setProperty("audioEnabled", true);
+    audioOutput = new QAudioOutput(QAudioDeviceInfo::defaultOutputDevice());
+    audioOutput->setVolume(0);
 }
 
 void QMLUtils::executeAfterDelay(QJSValue parent, QJSValue callback, int delay)
@@ -207,4 +210,9 @@ void QMLUtils::triggerPausedState(QObject* item)
     {
         pause(item);
     }
+}
+
+QMLUtils::~QMLUtils()
+{
+    delete audioOutput;
 }
