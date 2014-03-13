@@ -243,15 +243,11 @@ Rectangle {
     }
 
     onGameOver: {
-        var settings = {
-            records: records.value
-        }
-
-        File.writeObjectToFile("settings", settings);
+        Utils.gameSettings.records = records.value;
     }
 
     Component.onCompleted: {
-        var settings = File.readObjectFromFile("settings");
+        var settings = Utils.gameSettings;
         records.value = settings.records || 0;
     }
 

@@ -20,14 +20,40 @@ public slots:
     }
 };
 
+static QJSValue parseJson(const QString& str, QJSEngine* engine)
+{
+    QJSValue func = engine->evaluate("JSON.parse");
+    QJSValue result = func.call(QJSValueList()<<str);
+    if(result.isObject())
+    {
+        return result;
+    }
+
+    return engine->newObject();
+}
+
+static QString stringify(const QJSValue& value, QJSEngine* engine)
+{
+    QJSValue func = engine->evaluate("JSON.stringify");
+    QJSValue result = func.call(QJSValueList()<<value);
+    if(result.isString())
+    {
+        return result.toString();
+    }
+
+    return "{}";
+}
+
 QMLUtils::QMLUtils(QQuickView* view, QObject *parent) :
     QObject(parent),
     view(view)
 {
-    gameState_ = view->rootContext()->engine()->newObject();
-    gameState_.setProperty("audioEnabled", true);
-    audioOutput = new QAudioOutput(QAudioDeviceInfo::defaultOutputDevice());
-    audioOutput->setVolume(0);
+    QJSEngine* engine = view->engine();
+    gameState_ = engine->newObject();
+    QString settings = readFromFile("settings");
+    gameSettings_ = parseJson(settings, engine);
+
+    connect(view, SIGNAL(destroyed()), this, SLOT(onMainViewDestroyed()));
 }
 
 void QMLUtils::executeAfterDelay(QJSValue parent, QJSValue callback, int delay)
@@ -212,7 +238,18 @@ void QMLUtils::triggerPausedState(QObject* item)
     }
 }
 
+QJSValue QMLUtils::getGameSettings()
+{
+    return gameSettings_;
+}
+
 QMLUtils::~QMLUtils()
 {
-    delete audioOutput;
+
+}
+
+void QMLUtils::onMainViewDestroyed()
+{
+    QString value = stringify(gameSettings_, view->engine());
+    writeToFile("settings", value);
 }

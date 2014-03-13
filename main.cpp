@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 
     QQmlContext* context = viewer.rootContext();
     context->setContextProperty("screenSize", screenSize);
-    QMLUtils* utils = new QMLUtils(&viewer);
+    QMLUtils* utils = new QMLUtils(&viewer, &viewer);
     context->setContextProperty("Utils", utils);
 
     viewer.setSource(QUrl("qrc:///Main.qml"));

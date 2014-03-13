@@ -24,15 +24,18 @@ public:
     Q_INVOKABLE void triggerPausedState(QObject* item);
     QJSValue getGameState();
     Q_PROPERTY(QJSValue gameState READ getGameState)
+    QJSValue getGameSettings();
+    Q_PROPERTY(QJSValue gameSettings READ getGameSettings)
 
     ~QMLUtils();
 private:
     QQuickView* view;
     QJSValue gameState_;
+    QJSValue gameSettings_;
     QSet<QObject*> pausedItems;
-    QAudioOutput* audioOutput;
 signals:
-
+private slots:
+    void onMainViewDestroyed();
 public slots:
 
 };
