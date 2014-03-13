@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtMultimedia 5.0
 
 Rectangle {
 
@@ -54,6 +55,20 @@ Rectangle {
             onStartGame: {
                 main.state = "GAME"
             }
+        }
+    }
+
+    Audio {
+        id: backgroundSound
+        source: "sounds/background_song.mp3"
+        autoLoad: true
+    }
+
+    onStateChanged: {
+        if(state != "GAME"){
+            backgroundSound.play();
+        } else {
+            backgroundSound.stop();
         }
     }
 

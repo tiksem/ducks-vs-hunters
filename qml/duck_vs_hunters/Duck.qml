@@ -6,7 +6,7 @@ AnimatedSprite {
     property double movementSpeed: 0.3;
     property int radius: 50;
     property int maxHP: 10;
-    property int hp: 1;
+    property int hp: 10;
     property var targets: [];
     property point assPosition: Qt.point(70, 120);
     property int assRadius: 5;
@@ -27,6 +27,7 @@ AnimatedSprite {
 
     signal die;
     signal assDamaged;
+    signal damaged;
 
     states: [
         State {
@@ -76,6 +77,16 @@ AnimatedSprite {
 
     onDie: {
         destroy();
+    }
+
+    Audio {
+        id: damageSound
+        autoLoad: true;
+        source: "sounds/damage.wav"
+    }
+
+    onDamaged: {
+        damageSound.play();
     }
 
     Image {
