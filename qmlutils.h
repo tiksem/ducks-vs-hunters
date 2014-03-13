@@ -22,18 +22,11 @@ public:
     Q_INVOKABLE bool isPaused(QObject* item);
     Q_INVOKABLE void triggerPausedState(QObject* item);
     QJSValue getGameState();
-    bool isAudioEnabled();
-    void setAudioEnabled(bool value);
     Q_PROPERTY(QJSValue gameState READ getGameState)
-    Q_PROPERTY(bool audioEnabled READ isAudioEnabled() WRITE setAudioEnabled NOTIFY audioEnabledChanged)
-
-signals:
-    void audioEnabledChanged();
 private:
     QQuickView* view;
     QJSValue gameState_;
     QSet<QObject*> pausedItems;
-    bool audioEnabled_;
 signals:
 
 public slots:

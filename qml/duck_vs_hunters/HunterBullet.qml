@@ -6,6 +6,5 @@ Bullet {
         source: "sounds/hunter_shoot.mp3"
         volume: 0.2
         autoLoad: true
-        muted: !Utils.audioEnabled
     }
 }

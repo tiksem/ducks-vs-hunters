@@ -42,8 +42,5 @@
         <file>GameStart.qml</file>
         <file>images/foreground.jpg</file>
         <file>images/menu.png</file>
-        <file>images/sound_off.png</file>
-        <file>images/sound_on.png</file>
-        <file>sounds/background_song.mp3</file>
     </qresource>
 </RCC>

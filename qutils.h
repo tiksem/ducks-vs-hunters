@@ -25,8 +25,6 @@ public:
         ExecuteAfterDelaySlotHolder* slotHolder = new ExecuteAfterDelaySlotHolder(func);
         QTimer::singleShot(delay, slotHolder, SLOT(executeAfterDelay()));
     }
-
-    static void setPropertyRecursive(QObject* root, const char* propertyName, const QVariant& value);
 private:
 };
 
