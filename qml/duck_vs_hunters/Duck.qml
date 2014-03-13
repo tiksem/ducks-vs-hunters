@@ -4,14 +4,14 @@ import QtMultimedia 5.0
 AnimatedSprite {
     id: duck
     property double movementSpeed: 0.3;
-    property int radius: 50;
+    property int radius: 42;
     property int maxHP: 10;
     property int hp: 10;
     property var targets: [];
     property point assPosition: Qt.point(70, 120);
     property int assRadius: 5;
     property int assBlockingDuration: 5000;
-    property point center: Qt.point(70, 70);
+    property point center: Qt.point(80, 77);
 
     frameCount: 25
     frameRate: 40
