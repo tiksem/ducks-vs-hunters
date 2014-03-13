@@ -49,6 +49,17 @@ Rectangle {
         }
     }
 
+    Timer {
+        id: healer
+        interval: 20000
+        repeat: true
+        running: true
+
+        onTriggered: {
+            duck.hp++;
+        }
+    }
+
     ComboDisplayer {
         id: comboDisplayer
     }
