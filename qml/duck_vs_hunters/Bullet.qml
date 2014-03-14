@@ -12,6 +12,8 @@ Image {
     property int radius: 8;
     property Audio sound: null;
 
+    property bool paused: false;
+
     width: 15
     height: 15
     source: "images/real_bullet.png"
@@ -19,11 +21,13 @@ Image {
     NumberAnimation on x {
         id: moveByX;
         running: false;
+        paused: bullet.paused ? bullet.paused && running : false;
     }
 
     NumberAnimation on y {
         id: moveByY;
         running: false;
+        paused: bullet.paused ? bullet.paused && running : false;
     }
 
     function onCollide(target){
@@ -78,7 +82,10 @@ Image {
         var toY = moveByY.to = distance * sin + y;
         var duration = moveByX.duration = moveByY.duration = Math.abs(distance) / movementSpeed;
         moveByX.running = moveByY.running = true;
-        bullet.destroy(duration);
+
+        Utils.executeAfterDelay(bullet, function(){
+           bullet.destroy();
+        }, duration)
 
         if(sound){
             sound.play();

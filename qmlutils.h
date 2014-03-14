@@ -8,6 +8,13 @@
 #include <QQuickView>
 #include <QSet>
 #include <QAudioOutput>
+#include <QPointer>
+
+template<typename T>
+uint qHash(QPointer<T> key, uint seed)
+{
+    return qHash(key.data());
+}
 
 class QMLUtils : public QObject
 {
@@ -22,6 +29,8 @@ public:
     Q_INVOKABLE void resume(QObject* item);
     Q_INVOKABLE bool isPaused(QObject* item);
     Q_INVOKABLE void triggerPausedState(QObject* item);
+    Q_INVOKABLE void pauseTimers();
+    Q_INVOKABLE void resumeTimers();
     QJSValue getGameState();
     Q_PROPERTY(QJSValue gameState READ getGameState)
     QJSValue getGameSettings();
@@ -33,6 +42,8 @@ private:
     QJSValue gameState_;
     QJSValue gameSettings_;
     QSet<QObject*> pausedItems;
+    QSet<QPointer<QTimer>> timers;
+    bool timersPaused;
 signals:
 private slots:
     void onMainViewDestroyed();

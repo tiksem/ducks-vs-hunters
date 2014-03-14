@@ -152,6 +152,11 @@ Item {
 
     NumberAnimation on x {
         id: moving
+        paused: running && !animation.running;
+
+        onPausedChanged: {
+            console.log("onPausedChanged = " + moving.paused)
+        }
 
         onStopped: {
             if(hunter.state == "MOVE"){

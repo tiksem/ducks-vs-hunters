@@ -5,6 +5,7 @@
 #include <QRect>
 #include <assert.h>
 #include <QQmlContext>
+#include <QPointer>
 
 class ExecuteAfterDelay : public QObject
 {
@@ -54,6 +55,8 @@ QMLUtils::QMLUtils(QQuickView* view, QObject *parent) :
     gameSettings_ = parseJson(settings, engine);
 
     connect(view, SIGNAL(destroyed()), this, SLOT(onMainViewDestroyed()));
+
+    timersPaused = false;
 }
 
 void QMLUtils::executeAfterDelay(QJSValue parent, QJSValue callback, int delay)
@@ -63,8 +66,10 @@ void QMLUtils::executeAfterDelay(QJSValue parent, QJSValue callback, int delay)
     timer->connect(timer, &QTimer::timeout, [=]() mutable {
         callback.call();
         timer->stop();
+        timers.remove(timer);
     });
     timer->start();
+    timers.insert(timer);
 }
 
 static QString getSource(QJSValue value)
@@ -252,4 +257,27 @@ void QMLUtils::onMainViewDestroyed()
 {
     QString value = stringify(gameSettings_, view->engine());
     writeToFile("settings", value);
+}
+
+void QMLUtils::pauseTimers()
+{
+    for(QTimer* timer : timers)
+    {
+        timer->stop();
+    }
+}
+
+void QMLUtils::resumeTimers()
+{
+    for(QPointer<QTimer> timer : timers)
+    {
+        if(!timer.isNull())
+        {
+            timer->start();
+        }
+        else
+        {
+            timers.remove(timer);
+        }
+    }
 }

@@ -2,6 +2,7 @@ import QtQuick 2.0
 import "random.js" as Random
 import "file.js" as File
 import "array.js" as Array
+import "utils.js" as GameUtils;
 
 Rectangle {
     id: main
@@ -12,6 +13,8 @@ Rectangle {
     property string background: "";
 
     property int points: 0;
+
+    property var pauseHandler: null;
 
     signal gameOver;
 
@@ -51,6 +54,7 @@ Rectangle {
 
     Timer {
         id: healer
+        property string mark: "healer"
         interval: 20000
         repeat: true
         running: true
@@ -260,6 +264,7 @@ Rectangle {
     Component.onCompleted: {
         var settings = Utils.gameSettings;
         records.value = settings.records || 0;
+        pauseHandler = new GameUtils.ItemPauseHandler(main);
     }
 
     Text {
@@ -315,6 +320,15 @@ Rectangle {
         onReleased: {
             duck.state = "STOP"
             console.log("onReleased");
+        }
+    }
+
+    MouseArea {
+        width: main.width
+        height: main.height
+
+        onClicked: {
+            pauseHandler.togglePausedState();
         }
     }
 }

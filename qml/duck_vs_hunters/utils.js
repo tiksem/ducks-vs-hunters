@@ -3,38 +3,50 @@ function ItemPauseHandler(item){
 }
 ItemPauseHandler.prototype = {
     pause: function(){
+        console.log("pause");
+
         if(this.pausedItems)
         {
             return;
         }
 
+        var count = 0;
+
         var pausedItems = this.pausedItems = [];
         var pauseAction = function(item){
             if(item.paused !== undefined && !item.paused){
-                if(item.running !== undefined && item.running){
-                    pausedItems.push(item);
-                    item.paused = true;
-                }
+                pausedItems.push(item);
+                item.paused = true;
+                console.log(item);
+                console.log(item.paused);
             } else if(item.running !== undefined && item.running) {
                 pausedItems.push(item);
                 item.running = false;
             }
 
-            var children = item.children;
-            if(children){
-                for(var i = 0; i < children.length; i++){
-                    var child = children[i];
-                    if(child){
-                        pauseAction(child);
+            var pauseChildren = function(children){
+                if(children){
+                    for(var i = 0; i < children.length; i++){
+                        var child = children[i];
+                        if(child){
+                            pauseAction(child);
+                            count++;
+                        }
                     }
                 }
             }
+
+            pauseChildren(item.data);
+            //pauseChildren(item.children);
         }
 
+        Utils.pauseTimers();
         pauseAction(this.item);
     },
 
     resume: function(){
+        console.log("resume");
+
         if(!this.pausedItems){
             return;
         }
@@ -46,14 +58,13 @@ ItemPauseHandler.prototype = {
             var item = items[i];
 
             if(item.paused !== undefined){
-                if(item.running !== undefined){
-                    item.paused = false;
-                }
+                item.paused = false;
             } else if(item.running !== undefined) {
                 item.running = true;
             }
         }
 
+        Utils.resumeTimers();
         delete this.pausedItems;
     },
 
