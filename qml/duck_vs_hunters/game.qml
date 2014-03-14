@@ -272,24 +272,32 @@ Rectangle {
         x: 10
         y: 10
         text: qsTr(points.toString())
-        font.family: "Verdana"
-        font.pixelSize: 50
-        color: Qt.red
+        font.family: "Ravie";
+        font.pixelSize: 35;
+        color: "red";
     }
 
+    Image {
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: 5;
+        anchors.rightMargin:-2;
+        id: record;
+        source: "images/record.png";
+    }
     Text {
         id: records
         property int value: 0;
 
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.topMargin: 10;
+        anchors.topMargin: 30;
         anchors.rightMargin: 10;
 
         text: qsTr(value.toString())
-        font.family: "Verdana"
-        font.pixelSize: 50
-        color: Qt.red
+        font.family: "Ravie";
+        font.pixelSize: 35;
+        color: "#FF0A88";
     }
 
     MouseArea {

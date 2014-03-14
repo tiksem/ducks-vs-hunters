@@ -47,5 +47,6 @@
         <file>images/about.jpg</file>
         <file>About.qml</file>
         <file>images/pause.png</file>
+        <file>images/record.png</file>
     </qresource>
 </RCC>
