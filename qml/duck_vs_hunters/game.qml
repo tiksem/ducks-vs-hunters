@@ -323,6 +323,11 @@ Rectangle {
         }
     }
 
+    Image {
+        source: "images/pause.png"
+        visible: resume.enabled
+    }
+
     MouseArea {
         id: resume
         width: parent.width
@@ -342,6 +347,10 @@ Rectangle {
             pauseHandler.pause();
             resume.enabled = true;
         }
+    }
+
+    Keys.onSpacePressed: {
+        onBack();
     }
 
     Keys.onBackPressed: {

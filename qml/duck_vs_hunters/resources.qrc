@@ -46,5 +46,6 @@
         <file>sounds/damage.wav</file>
         <file>images/about.jpg</file>
         <file>About.qml</file>
+        <file>images/pause.png</file>
     </qresource>
 </RCC>
