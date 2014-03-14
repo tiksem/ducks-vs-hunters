@@ -263,9 +263,16 @@ void QMLUtils::onMainViewDestroyed()
 
 void QMLUtils::pauseTimers()
 {
-    for(QTimer* timer : timers)
+    for(QPointer<QTimer> timer : timers)
     {
-        timer->stop();
+        if(!timer.isNull())
+        {
+            timer->stop();
+        }
+        else
+        {
+            timers.remove(timer);
+        }
     }
 }
 
