@@ -1,3 +1,26 @@
+function iterateChildren(item, callback){
+    var iteratedChildren = []
+
+    var iterate = function(item){
+        if(callback(item)){
+            iteratedChildren.push(item);
+        }
+
+        var children = item.data;
+        if(children){
+            for(var i = 0; i < children.length; i++){
+                var child = children[i];
+                if(child){
+                    iterate(child);
+                }
+            }
+        }
+    }
+
+    iterate(item);
+    return iteratedChildren;
+}
+
 function ItemPauseHandler(item){
     this.item = item;
 }
@@ -10,35 +33,22 @@ ItemPauseHandler.prototype = {
             return;
         }
 
-        var count = 0;
-
-        var pausedItems = this.pausedItems = [];
         var pauseAction = function(item){
             if(item.paused !== undefined && !item.paused){
-                pausedItems.push(item);
                 item.paused = true;
-            } else if(item.running !== undefined && item.running) {
-                pausedItems.push(item);
+                return true;
+            }
+
+            if(item.running !== undefined && item.running) {
                 item.running = false;
+                return true;
             }
 
-            var pauseChildren = function(children){
-                if(children){
-                    for(var i = 0; i < children.length; i++){
-                        var child = children[i];
-                        if(child){
-                            pauseAction(child);
-                            count++;
-                        }
-                    }
-                }
-            }
-
-            pauseChildren(item.data);
+            return false;
         }
 
         Utils.pauseTimers();
-        pauseAction(this.item);
+        this.pausedItems = iterateChildren(item, pauseAction);
     },
 
     resume: function(){
