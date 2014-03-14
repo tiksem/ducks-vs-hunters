@@ -36,7 +36,12 @@ public:
     QJSValue getGameSettings();
     Q_PROPERTY(QJSValue gameSettings READ getGameSettings)
 
+    bool eventFilter(QObject *obj, QEvent *event);
+
     ~QMLUtils();
+signals:
+    void onApplicationActivated();
+    void onApplicationDeactivated();
 private:
     QQuickView* view;
     QJSValue gameState_;

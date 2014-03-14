@@ -57,6 +57,8 @@ QMLUtils::QMLUtils(QQuickView* view, QObject *parent) :
     connect(view, SIGNAL(destroyed()), this, SLOT(onMainViewDestroyed()));
 
     timersPaused = false;
+
+    QCoreApplication::instance()->installEventFilter(this);
 }
 
 void QMLUtils::executeAfterDelay(QJSValue parent, QJSValue callback, int delay)
@@ -250,7 +252,7 @@ QJSValue QMLUtils::getGameSettings()
 
 QMLUtils::~QMLUtils()
 {
-
+    QCoreApplication::instance()->removeEventFilter(this);
 }
 
 void QMLUtils::onMainViewDestroyed()
@@ -280,4 +282,21 @@ void QMLUtils::resumeTimers()
             timers.remove(timer);
         }
     }
+}
+
+bool QMLUtils::eventFilter(QObject *obj, QEvent *event)
+{
+    if (event->type() == QEvent::ApplicationDeactivate)
+    {
+        emit onApplicationDeactivated();
+        return true;
+    }
+
+    if(event->type() == QEvent::ApplicationActivate)
+    {
+        emit onApplicationActivated();
+        return true;
+    }
+
+    return QObject::eventFilter(obj, event);
 }

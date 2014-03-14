@@ -265,6 +265,7 @@ Rectangle {
         var settings = Utils.gameSettings;
         records.value = settings.records || 0;
         pauseHandler = new GameUtils.ItemPauseHandler(main);
+        Utils.onApplicationDeactivated.connect(pause);
     }
 
     Text {
@@ -340,12 +341,16 @@ Rectangle {
         }
     }
 
+    function pause(){
+        pauseHandler.pause();
+        resume.enabled = true;
+    }
+
     function onBack(){
         if(pauseHandler.isPaused()){
             Qt.quit();
         } else {
-            pauseHandler.pause();
-            resume.enabled = true;
+            pause();
         }
     }
 
