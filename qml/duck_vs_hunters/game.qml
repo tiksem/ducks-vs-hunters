@@ -324,11 +324,31 @@ Rectangle {
     }
 
     MouseArea {
-        width: main.width
-        height: main.height
+        id: resume
+        width: parent.width
+        height: parent.height
+        enabled: false;
 
         onClicked: {
-            pauseHandler.togglePausedState();
+            pauseHandler.resume();
+            enabled = false;
         }
+    }
+
+    function onBack(){
+        if(pauseHandler.isPaused()){
+            Qt.quit();
+        } else {
+            pauseHandler.pause();
+            resume.enabled = true;
+        }
+    }
+
+    Keys.onBackPressed: {
+        onBack();
+    }
+
+    Keys.onEscapePressed: {
+        onBack();
     }
 }

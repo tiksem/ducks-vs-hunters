@@ -17,8 +17,6 @@ ItemPauseHandler.prototype = {
             if(item.paused !== undefined && !item.paused){
                 pausedItems.push(item);
                 item.paused = true;
-                console.log(item);
-                console.log(item.paused);
             } else if(item.running !== undefined && item.running) {
                 pausedItems.push(item);
                 item.running = false;
@@ -37,7 +35,6 @@ ItemPauseHandler.prototype = {
             }
 
             pauseChildren(item.data);
-            //pauseChildren(item.children);
         }
 
         Utils.pauseTimers();

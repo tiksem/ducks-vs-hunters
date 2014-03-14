@@ -21,5 +21,7 @@ int main(int argc, char *argv[])
 
     viewer.showNormal();
 
+    QObject::connect(viewer.engine(), SIGNAL(quit()), &app, SLOT(quit()));
+
     return app.exec();
 }
