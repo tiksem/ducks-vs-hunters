@@ -11,7 +11,7 @@
 #include <QPointer>
 
 template<typename T>
-uint qHash(QPointer<T> key, uint seed)
+uint qHash(QPointer<T> key)
 {
     return qHash(key.data());
 }
