@@ -278,10 +278,11 @@ Rectangle {
     }
 
     Image {
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.topMargin: 5;
-        anchors.rightMargin:-2;
+
+        anchors.left: records.left
+        anchors.top: HealthBar.top
+        //anchors.topMargin: 5;
+        anchors.leftMargin:-11;
         id: record;
         source: "images/record.png";
     }
@@ -289,9 +290,9 @@ Rectangle {
         id: records
         property int value: 0;
 
-        anchors.top: parent.top
+        anchors.top: record.bottom
         anchors.right: parent.right
-        anchors.topMargin: 30;
+        anchors.topMargin: -5;
         anchors.rightMargin: 10;
 
         text: qsTr(value.toString())
