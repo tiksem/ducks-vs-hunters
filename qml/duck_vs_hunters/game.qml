@@ -32,6 +32,7 @@ Rectangle {
     }
 
     HealthBar {
+        id:helth
         maxHitPoints: duck.maxHP
         hitPoints: duck.hp
         anchors.top: main.top
@@ -279,10 +280,9 @@ Rectangle {
 
     Image {
 
-        anchors.left: records.left
-        anchors.top: HealthBar.top
-        //anchors.topMargin: 5;
-        anchors.leftMargin:-11;
+        anchors.left: helth.right
+        anchors.top: helth.top
+        anchors.right: parent.right
         id: record;
         source: "images/record.png";
     }
@@ -293,7 +293,7 @@ Rectangle {
         anchors.top: record.bottom
         anchors.right: parent.right
         anchors.topMargin: -5;
-        anchors.rightMargin: 10;
+        anchors.rightMargin: 20;
 
         text: qsTr(value.toString())
         font.family: "Ravie";
