@@ -280,9 +280,10 @@ Rectangle {
 
     Image {
 
-        anchors.left: helth.right
-        anchors.top: helth.top
-        anchors.right: parent.right
+        //anchors.left: helth.right
+        anchors.topMargin: 20;
+        anchors.top: helth.bottom
+        anchors.right: records.left
         id: record;
         source: "images/record.png";
     }
@@ -292,7 +293,7 @@ Rectangle {
 
         anchors.top: record.bottom
         anchors.right: parent.right
-        anchors.topMargin: -5;
+        anchors.topMargin: -35;
         anchors.rightMargin: 20;
 
         text: qsTr(value.toString())
