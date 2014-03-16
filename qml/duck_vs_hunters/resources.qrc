@@ -43,10 +43,10 @@
         <file>images/foreground.jpg</file>
         <file>images/menu.png</file>
         <file>sounds/background_song.mp3</file>
-        <file>sounds/damage.wav</file>
         <file>images/about.jpg</file>
         <file>About.qml</file>
         <file>images/pause.png</file>
         <file>images/record.png</file>
+        <file>sounds/damage.mp3</file>
     </qresource>
 </RCC>

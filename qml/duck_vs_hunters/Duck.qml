@@ -82,7 +82,7 @@ AnimatedSprite {
     Audio {
         id: damageSound
         autoLoad: true;
-        source: "sounds/damage.wav"
+        source: "sounds/damage.mp3"
     }
 
     onDamaged: {
