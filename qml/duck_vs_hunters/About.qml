@@ -4,6 +4,7 @@ Image {
     id: main
     source: "images/about.jpg"
     y: - height
+    focus: y != -height
 
     NumberAnimation on y {
         id: openAnimation;
@@ -34,5 +35,9 @@ Image {
         onClicked: {
             close();
         }
+    }
+
+    Keys.onBackPressed: {
+        close();
     }
 }
