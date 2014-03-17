@@ -258,8 +258,13 @@ Rectangle {
         }
     }
 
-    onGameOver: {
+    function saveRecords(){
         Utils.gameSettings.records = records.value;
+    }
+
+    onGameOver: {
+        saveRecords();
+        Utils.saveGameSettings();
     }
 
     Component.onCompleted: {
@@ -358,6 +363,7 @@ Rectangle {
 
     function onBack(){
         if(pauseHandler.isPaused()){
+            saveRecords();
             Qt.quit();
         } else {
             pause();

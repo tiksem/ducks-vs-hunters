@@ -255,10 +255,15 @@ QMLUtils::~QMLUtils()
     QCoreApplication::instance()->removeEventFilter(this);
 }
 
-void QMLUtils::onMainViewDestroyed()
+void QMLUtils::saveGameSettings()
 {
     QString value = stringify(gameSettings_, view->engine());
     writeToFile("settings", value);
+}
+
+void QMLUtils::onMainViewDestroyed()
+{
+    saveGameSettings();
 }
 
 void QMLUtils::pauseTimers()

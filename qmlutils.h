@@ -31,6 +31,7 @@ public:
     Q_INVOKABLE void triggerPausedState(QObject* item);
     Q_INVOKABLE void pauseTimers();
     Q_INVOKABLE void resumeTimers();
+    Q_INVOKABLE void saveGameSettings();
     QJSValue getGameState();
     Q_PROPERTY(QJSValue gameState READ getGameState)
     QJSValue getGameSettings();
