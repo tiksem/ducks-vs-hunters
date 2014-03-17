@@ -286,9 +286,10 @@ Rectangle {
     Image {
 
         //anchors.left: helth.right
-        anchors.topMargin: 20;
+        anchors.topMargin:20;
         anchors.top: helth.bottom
         anchors.right: records.left
+        //anchors.verticalCenter:records.verticalCenter;
         id: record;
         source: "images/record.png";
     }
@@ -296,11 +297,10 @@ Rectangle {
         id: records
         property int value: 0;
 
-        anchors.top: record.bottom
-        anchors.right: parent.right
-        anchors.topMargin: -35;
+        //anchors.top: record.bottom
+        anchors.right: parent.right;
         anchors.rightMargin: 20;
-
+        anchors.verticalCenter:record.verticalCenter;
         text: qsTr(value.toString())
         font.family: "Ravie";
         font.pixelSize: 35;
