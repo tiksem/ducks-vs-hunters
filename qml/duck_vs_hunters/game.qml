@@ -79,7 +79,7 @@ Rectangle {
 
         Hunter {
             hp: 1
-            image: "images/light_hunter.png"
+            image: "images/Separatist.png"
         }
     }
 
@@ -89,7 +89,7 @@ Rectangle {
         Hunter {
             hp: 2
             level: 2
-            image: "images/middle_hunter.png"
+            image: "images/Separatist.png"
         }
     }
 
@@ -99,7 +99,7 @@ Rectangle {
         Hunter {
             hp: 3
             level: 3
-            image: "images/hard_hunter.png"
+            image: "images/Separatist.png"
         }
     }
 

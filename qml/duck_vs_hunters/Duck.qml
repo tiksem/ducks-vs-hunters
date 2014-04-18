@@ -4,16 +4,16 @@ import QtMultimedia 5.0
 AnimatedSprite {
     id: duck
     property double movementSpeed: 0.3;
-    property int radius: 42;
+    property int radius: 43;
     property int maxHP: 10;
     property int hp: 10;
     property var targets: [];
     property point assPosition: Qt.point(70, 120);
-    property int assRadius: 5;
+    property int assRadius: 6;
     property int assBlockingDuration: 5000;
-    property point center: Qt.point(80, 77);
+    property point center: Qt.point(72, 83);
 
-    frameCount: 25
+    frameCount: 24
     frameRate: 40
     frameHeight: 140
     frameWidth: 140
@@ -94,7 +94,7 @@ AnimatedSprite {
         visible: false;
         source: "images/ass_blocker.png"
         width: 140;
-        height: 56;
+        height: 140;
         anchors.bottom: duck.bottom;
         anchors.left: duck.left;
     }

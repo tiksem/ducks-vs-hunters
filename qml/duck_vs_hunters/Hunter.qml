@@ -11,49 +11,49 @@ Item {
                                                                 55 - 31);
     property var target: undefined;
     property int hp: 1;
-    property int radius: 26;
-    property point center: Qt.point(47, 45);
+    property int radius: 55;
+    property point center: Qt.point(100, 67);
     property int points: 10;
-    property string image: "images/light_hunter.png";
+    property string image: "images/Separatist.png";
 
     property int level: 1;
 
     SpriteSequence {
         id: animation
         running: true
-        width: 120
-        height: 150
+        width: 200
+        height: 170
         interpolate: true;
         Sprite {
             name: "run"
-            frameCount: 30
+            frameCount: 24
             frameRate: 30
-            frameHeight: 150
-            frameWidth: 120
+            frameHeight: 170
+            frameWidth: 200
             source: image
         }
         Sprite {
             name: "death"
             frameCount: 24
             frameRate: 30
-            frameHeight: 150
-            frameWidth: 120
-            frameX: 120 * 56
+            frameHeight: 170
+            frameWidth: 200
+            frameX: 200 * 72
             source: image
         }
         Sprite {
             name: "fire"
-            frameCount: 55 - 31
+            frameCount: 72-24
             frameRate: 30
-            frameHeight: 150
-            frameWidth: 120
-            frameX: 120 * 31
+            frameHeight: 170
+            frameWidth:200
+            frameX: 200 * 24
             source: image
         }
     }
 
-    width: 120
-    height: 150
+    width: 200
+    height: 170
     state: "IDLE"
 
     property bool rotated: false;
