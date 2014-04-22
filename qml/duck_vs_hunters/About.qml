@@ -9,7 +9,7 @@ Image {
     Text {
         font.family: "Verdana"
         font.pixelSize: 50
-        text: "Ва обосрали " + (Utils.gameSettings.records || 0) + " сепаратистов!"
+        text: qsTr("Ва обосрали " + (Utils.gameSettings.records || 0) + " сепаратистов!")
         anchors.centerIn: parent
     }
 
