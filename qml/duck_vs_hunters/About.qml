@@ -6,6 +6,13 @@ Image {
     y: - height
     focus: y != -height
 
+    Text {
+        font.family: "Verdana"
+        font.pixelSize: 50
+        text: "Ва обосрали " + (Utils.gameSettings.records || 0) + " сепаратистов!"
+        anchors.centerIn: parent
+    }
+
     NumberAnimation on y {
         id: openAnimation;
         to: 0;

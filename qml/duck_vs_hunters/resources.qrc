@@ -21,7 +21,6 @@
         <file>images/triple.png</file>
         <file>images/ultra.png</file>
         <file>images/ass_blocker.png</file>
-        <file>images/light_hunter.png</file>
         <file>images/real_bullet.png</file>
         <file>images/shit.png</file>
         <file>HealthBar.qml</file>
@@ -34,8 +33,6 @@
         <file>HunterBullet.qml</file>
         <file>math.js</file>
         <file>animation.js</file>
-        <file>images/hard_hunter.png</file>
-        <file>images/middle_hunter.png</file>
         <file>array.js</file>
         <file>utils.js</file>
         <file>SeveralAnimationsDisplayer.qml</file>
