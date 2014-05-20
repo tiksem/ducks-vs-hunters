@@ -26,8 +26,8 @@ Item {
         interpolate: true;
         Sprite {
             name: "run"
-            frameCount: 24
-            frameRate: 30
+            frameCount: 6
+            frameRate: 20
             frameHeight: 170
             frameWidth: 200
             source: image
@@ -43,11 +43,11 @@ Item {
         }
         Sprite {
             name: "fire"
-            frameCount: 72-24
-            frameRate: 30
+            frameCount: 18-6
+            frameRate: 20
             frameHeight: 170
             frameWidth:200
-            frameX: 200 * 24
+            frameX: 200 * 6
             source: image
         }
     }
